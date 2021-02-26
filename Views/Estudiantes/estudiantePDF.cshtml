@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Estudiante>
+
+@{
+    ViewData["Title"] = "estudiantePDF";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Estudiantes</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="~/images/generic-logo.png" />
+        </div>
+        <div class="col-sm-8 text-right">
+            <h3 align="center">Escuela primaria "El Rosario" </h3>
+            <h3 align="center">Historial de estudiantes </h3>
+
+        </div>
+    </div>
+
+    <table class="table">
+
+        <thead class="table-striped">
+
+            <tr>
+
+                <th>
+                    Nombres
+                </th>
+
+                <th>
+                    Apellidos
+                </th>
+
+                <th>
+                   Código
+                </th>
+
+                <th>
+                    Edad
+                </th>
+
+                <th>
+                    Sexo
+                </th>
+
+
+                <th>
+                     Departamento
+                </th>
+
+                <th>
+                    Ciudad
+                </th>
+
+                <th>
+                   Direccion
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Edad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sexo)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ciudad)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+﻿@model IEnumerable<ROSARIOAPP.Models.Estudiante>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"></script>
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title text-blue">Listado de estudiantes</h6>
+                </div>
+                <div class="card-body">
+
+                    <!-- Modal -->
+                    <div id="myModal" data-refresh="true" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" aria-hidden="true"
+                         style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="align-content-center"
+                                         id="modal-content">
+                                        <h4 class="fa-align-center">Cargando..</h4>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br />
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-right">
+                                <a class="btn btn-danger btn-sm" asp-action="estudiantePDF" align="right">Generar reporte</a>
+                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Agregar estudiante</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+
+
+
+
+                    <div class="container">
+                        <div class="row">
+
+
+                            <table class="display" id="estuTable" style="width:100%">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Nombres
+                                        </th>
+
+                                        <th>
+                                            Apellidos
+                                        </th>
+
+                                        <th>
+                                            Código
+                                        </th>
+
+                                        <th>
+                                            Edad
+                                        </th>
+
+                                        <th>
+                                            Sexo
+                                        </th>
+
+
+                                        <th>
+                                            Departamento
+                                        </th>
+
+                                        <th>
+                                            Ciudad
+                                        </th>
+
+                                        <th>
+                                            Dirección
+                                        </th>
+
+
+                                        <th>Acciones</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Nombres)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Apellidos)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.codigo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Edad)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Sexo)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Departamento)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Ciudad)
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Direccion)
+                                            </td>
+
+                                            <td>
+                                                <a href="#myModal" class="btnDeta btn-light btn-sm" data-toggle="modal"
+                                                   data-id="@item.Idestudiante"><i class="fas fa-eye"></i></a>
+
+                                                <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                                   data-id="@item.Idestudiante"><i class="fas fa-edit"></i></a>
+
+
+                                                <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                                   data-id="@item.Idestudiante"><i class="fas fa-trash-alt"></i></a>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br />
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div><!-- /.container-fluid -->
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#estuTable').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+    <script src="~/js/Estudiante/Estudiante.js"></script>
+
+}
+

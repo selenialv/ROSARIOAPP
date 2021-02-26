@@ -1,0 +1,15 @@
+﻿@model ROSARIOAPP.Models.Asignar
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 align="center">¿Estás seguro que quieres eliminar esto?</h3>
+
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Idasignar" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        
+    </form>
+

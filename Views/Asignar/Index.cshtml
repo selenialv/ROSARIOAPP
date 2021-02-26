@@ -1,0 +1,119 @@
+﻿@model IEnumerable<ROSARIOAPP.Models.Asignar>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title text-blue">Listado de grupos</h6>
+                </div>
+                <div class="card-body">
+
+                    <!-- Modal inicio -->
+                    <div id="myModal" data-refresh="true" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" aria-hidden="true"
+                         style="display: none;">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="staticBackdropLabel">Asingar grupo a docente</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="align-content-center"
+                                         id="modal-content">
+                                        <h4 class="fa-align-center">Cargando..</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*Fin del modal*@
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-right">
+                                @*<a class="btn btn-danger btn-sm" asp-action="estudiant" align="right">Generar reporte</a>*@
+                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus">Nueva asignación</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <table id="asigTable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tutor:
+                                </th>
+                                <th>
+                                    Docente:
+                                </th>
+                                <th>
+                                    Grupo:
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tutor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IddocenteNavigation.Iddocente)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdgrupoNavigation.Idgrupo)
+                                    </td>
+                                    <td>
+                                        <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                           data-id="@item.Idasignar"><i class="fas fa-edit"></i></a>
+
+
+                                        <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                           data-id="@item.Idasignar"><i class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+
+</div><!-- /.container-fluid -->
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#asigTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                },
+
+
+            });
+        });
+    </script>
+
+    <script src="~/js/Grupo/Asignar.js"></script>
+    }

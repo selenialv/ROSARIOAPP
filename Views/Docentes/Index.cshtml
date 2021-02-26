@@ -1,0 +1,176 @@
+﻿@model IEnumerable<ROSARIOAPP.Models.Docente>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title text-blue">Listado de docentes</h6>
+                </div>
+                <div class="card-body">
+
+                    <!-- Modal inicio -->
+                    <div id="myModal" data-refresh="true" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" aria-hidden="true"
+                         style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="align-content-center"
+                                         id="modal-content">
+                                        <h4 class="fa-align-center">Cargando..</h4>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Fin del modal*@
+
+
+                    <br />
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-right">
+                                @*<a class="btn btn-danger btn-sm" asp-action="estudiant" align="right">Generar reporte</a>*@
+                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus">Agregar docente</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="container">
+                        <div class="row">
+
+                            <table class="table" id="doceTable" >
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Nombres)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Apellidos)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Sexo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Cedula)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Departamento)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Ciudad)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Telefono)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Profesion)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Direccion)
+                                        </th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombres)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Apellidos)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Sexo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Cedula)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Departamento)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Ciudad)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Telefono)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Profesion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Direccion)
+                                            </td>
+                                            <td>
+
+
+                                                <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                                   data-id="@item.Iddocente"><i class="fas fa-edit"></i></a>
+
+
+                                                <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                                   data-id="@item.Iddocente"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br />
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div><!-- /.container-fluid -->
+
+@section scripts
+{
+ 
+     <script>
+            $(document).ready(function () {
+                $('#doceTable').DataTable({
+                    "scrollX": true
+                }
+
+
+                );
+
+            });
+ 
+    </script>
+
+    <script src="~/js/Docente/Docente.js"></script>
+
+}

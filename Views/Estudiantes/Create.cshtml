@@ -1,0 +1,152 @@
+﻿@model ROSARIOAPP.Models.Estudiante
+
+@{
+    //ViewData["Title"] = "Create";
+    Layout = null;
+
+}
+
+
+<link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+
+
+<h4 align="center">Agregar nuevo estudiante</h4>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-10 mx-auto">
+
+            <form asp-action="Create">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group col-sm-4">
+                    <label asp-for="codigo" class="control-label">Código</label>
+                    <input asp-for="codigo" class="form-control" required="" />
+                    <span asp-validation-for="codigo" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="Nombres" class="control-labe l"></label>
+                        <input asp-for="Nombres" class="form-control" required="" />
+                        <span asp-validation-for="Nombres" class="text-danger"></span>
+                    </div>
+
+                    <div class="col">
+                        <label asp-for="Apellidos" class="control-label"></label>
+                        <input asp-for="Apellidos" class="form-control" required="" />
+                        <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="col-sm-2">
+                        <label asp-for="Edad" class="control-label"></label>
+                        <input asp-for="Edad" class="form-control" required="" />
+                        <span asp-validation-for="Edad" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col-sm-2">
+
+                        <label asp-for="Sexo" class="control-label"></label>
+                        <select asp-for="Sexo" class="form-control">
+
+                            <option selected disabled>Seleccionar</option>
+                            <option>Masculino</option>
+                            <option>Femenino</option>
+                        </select>
+
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Departamento" class="control-label"></label>
+                        <select asp-for="Departamento" class="form-control">
+
+                            <option selected disabled>Seleccionar</option>
+                            <option>Esteli</option>
+                            <option>León</option>
+                            <option>Managua</option>
+                            <option>Rivas</option>
+                            <option>Masaya</option>
+                            <option>Granada</option>
+                            <option>San Juan</option>
+                            <option>Chontales</option>
+                            <option>Chinandega</option>
+                            <option>Masaya</option>
+                            <option>Boaco</option>
+                            <option>RAAN</option>
+                            <option>RAAS</option>
+
+                        </select>
+
+                        <span asp-validation-for="Departamento" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col">
+                        <label asp-for="Ciudad" class="control-label"></label>
+                        <select asp-for="Ciudad" class="form-control" required="">
+                            <option selected disabled>Seleccionar</option>
+                            <option>Esteli</option>
+                            <option>León</option>
+                            <option>Managua</option>
+                            <option>Rivas</option>
+                            <option>Masaya</option>
+                            <option>Granada</option>
+                            <option>San Juan</option>
+                            <option>Juigalpa</option>
+                            <option>Chinandega</option>
+                            <option>Masaya</option>
+                            <option>Boaco</option>
+                            <option>RAAN</option>
+                            <option>RAAS</option>
+
+                        </select>
+
+                        <span asp-validation-for="Ciudad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="Direccion" class="control-label"></label>
+                        <input asp-for="Direccion" class="form-control" required="" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="fecha_nac" class="control-label"></label>
+                        <input asp-for="fecha_nac" class="form-control" required="" />
+                        <span asp-validation-for="fecha_nac" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <br />
+
+                <div class="form-group" align="center">
+
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
