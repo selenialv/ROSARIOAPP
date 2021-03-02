@@ -6,32 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ROSARIOAPP.Models;
-using Microsoft.AspNetCore.Authorization;
-
-
 
 namespace ROSARIOAPP.Controllers
 {
-
-    [Authorize]
-    [Authorize(Roles = "admin")]
-    public class DocentesController : Controller
+    public class GradosController : Controller
     {
         private readonly RosarioDBContext _context;
 
-        public DocentesController(RosarioDBContext context)
+        public GradosController(RosarioDBContext context)
         {
             _context = context;
         }
 
-        // GET: Docentes
+        // GET: Grados
         public async Task<IActionResult> Index()
         {
-
-            return View(await _context.Docente.ToListAsync());
+            return View(await _context.Grado.ToListAsync());
         }
 
-        // GET: Docentes/Details/5
+        // GET: Grados/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,39 +32,39 @@ namespace ROSARIOAPP.Controllers
                 return NotFound();
             }
 
-            var docente = await _context.Docente
-                .FirstOrDefaultAsync(m => m.Iddocente == id);
-            if (docente == null)
+            var grado = await _context.Grado
+                .FirstOrDefaultAsync(m => m.Idgrado == id);
+            if (grado == null)
             {
                 return NotFound();
             }
 
-            return View(docente);
+            return View(grado);
         }
 
-        // GET: Docentes/Create
+        // GET: Grados/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Docentes/Create
+        // POST: Grados/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Iddocente,Nombres,Apellidos,Sexo,Cedula,Departamento,Ciudad,Telefono,Profesion,Direccion")] Docente docente)
+        public async Task<IActionResult> Create([Bind("Idgrado,Grado1")] Grado grado)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(docente);
+                _context.Add(grado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(docente);
+            return View(grado);
         }
 
-        // GET: Docentes/Edit/5
+        // GET: Grados/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,22 +72,22 @@ namespace ROSARIOAPP.Controllers
                 return NotFound();
             }
 
-            var docente = await _context.Docente.FindAsync(id);
-            if (docente == null)
+            var grado = await _context.Grado.FindAsync(id);
+            if (grado == null)
             {
                 return NotFound();
             }
-            return View(docente);
+            return View(grado);
         }
 
-        // POST: Docentes/Edit/5
+        // POST: Grados/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Iddocente,Nombres,Apellidos,Sexo,Cedula,Departamento,Ciudad,Telefono,Profesion,Direccion")] Docente docente)
+        public async Task<IActionResult> Edit(int id, [Bind("Idgrado,Grado1")] Grado grado)
         {
-            if (id != docente.Iddocente)
+            if (id != grado.Idgrado)
             {
                 return NotFound();
             }
@@ -103,12 +96,12 @@ namespace ROSARIOAPP.Controllers
             {
                 try
                 {
-                    _context.Update(docente);
+                    _context.Update(grado);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DocenteExists(docente.Iddocente))
+                    if (!GradoExists(grado.Idgrado))
                     {
                         return NotFound();
                     }
@@ -119,42 +112,41 @@ namespace ROSARIOAPP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(docente);
+            return View(grado);
         }
 
-        // GET: Docentes/Delete/5
+        // GET: Grados/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            var docente = await _context.Docente
-                .FirstOrDefaultAsync(m => m.Iddocente == id);
-            if (docente == null)
+            var grado = await _context.Grado
+                .FirstOrDefaultAsync(m => m.Idgrado == id);
+            if (grado == null)
             {
                 return NotFound();
             }
 
-            return View(docente);
+            return View(grado);
         }
 
-        // POST: Docentes/Delete/5
+        // POST: Grados/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var docente = await _context.Docente.FindAsync(id);
-            _context.Docente.Remove(docente);
+            var grado = await _context.Grado.FindAsync(id);
+            _context.Grado.Remove(grado);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DocenteExists(int id)
+        private bool GradoExists(int id)
         {
-            return _context.Docente.Any(e => e.Iddocente == id);
+            return _context.Grado.Any(e => e.Idgrado == id);
         }
     }
 }

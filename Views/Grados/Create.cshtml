@@ -1,28 +1,30 @@
-﻿@model ROSARIOAPP.Models.Grupo
+﻿@model ROSARIOAPP.Models.Grado
 
 @{
     ViewData["Title"] = "Create";
     Layout = null;
-
 }
 
-<div class="row" algn="center">
-    <div class="col-md-auto">
+<div class="row">
+    <div class="col-md-10">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="seccion" class="control-label">Sección:</label>
-                <input asp-for="seccion" class="form-control" required="" />
-                <span asp-validation-for="seccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Idgrado" class="control-label">Grado:</label>
-                <select asp-for="Idgrado" class="form-control" asp-items="ViewBag.Idgrado">--Seleccione grado--</select>
+                <label asp-for="Grado1" class="control-label">Grado</label>
+                <select asp-for="Grado1" class="form-control" required="">
+                    <option disabled>--Seleccione el grado--</option>
+                    <option> A</option>
+                    <option> B</option>
+                    <option> C</option>
+                    <option> D</option>
+
+                </select>
+                <span asp-validation-for="Grado1" class="text-danger"></span>
             </div>
         </form>
-
     </div>
 </div>
+
 
 <div class="modal-footer">
 
@@ -33,7 +35,6 @@
 
     <button type="button" href="#myModal" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 </div>
-
 
 
 @section Scripts {

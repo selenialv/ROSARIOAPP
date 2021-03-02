@@ -1,0 +1,69 @@
+﻿@model ROSARIOAPP.Models.Matricula
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Matricula</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Idmatricula" />
+            <div class="form-group">
+                <label asp-for="Idestudiante" class="control-label"></label>
+                <select asp-for="Idestudiante" class="form-control" asp-items="ViewBag.Idestudiante"></select>
+                <span asp-validation-for="Idestudiante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idmodalidad" class="control-label"></label>
+                <select asp-for="Idmodalidad" class="form-control" asp-items="ViewBag.Idmodalidad"></select>
+                <span asp-validation-for="Idmodalidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idgrupo" class="control-label"></label>
+                <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo"></select>
+                <span asp-validation-for="Idgrupo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="año_lectivo" class="control-label"></label>
+                <input asp-for="año_lectivo" class="form-control" />
+                <span asp-validation-for="año_lectivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fecha_matricula" class="control-label"></label>
+                <input asp-for="fecha_matricula" class="form-control" />
+                <span asp-validation-for="fecha_matricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="repitente" class="control-label"></label>
+                <input asp-for="repitente" class="form-control" />
+                <span asp-validation-for="repitente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tarjeta" class="control-label"></label>
+                <input asp-for="tarjeta" class="form-control" />
+                <span asp-validation-for="tarjeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estado" class="control-label"></label>
+                <input asp-for="estado" class="form-control" />
+                <span asp-validation-for="estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

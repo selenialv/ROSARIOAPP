@@ -1,0 +1,78 @@
+﻿@model ROSARIOAPP.Models.Matricula
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Idestudiante" class="control-label">Estudiante:</label>
+                <select asp-for="Idestudiante" class ="form-control" asp-items="ViewBag.Idestudiante"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idmodalidad" class="control-label"></label>
+                <select asp-for="Idmodalidad" class ="form-control" asp-items="ViewBag.Idmodalidad">Modalidad</select>
+            </div>
+            <div class="col">
+                <label asp-for="Idgrupo" class="control-label">Grupo</label>
+                <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="año_lectivo" class="control-label">Año lectivo</label>
+                <input asp-for="año_lectivo" class="form-control" />
+                <span asp-validation-for="año_lectivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fecha_matricula" class="control-label">Fecha de matricula</label>
+                <input asp-for="fecha_matricula" class="form-control" />
+                <span asp-validation-for="fecha_matricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="repitente" class="control-label">Repitente</label>
+                <select asp-for="repitente" class="form-control" required="">
+                    <option selected>Seleccionar</option>
+                    <option>SI</option>
+                    <option> NO</option>
+
+                </select>
+                <span asp-validation-for="repitente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tarjeta" class="control-label">Tarjeta de vacuna</label>
+                <select asp-for="tarjeta" class="form-control" required="">
+                    <option disabled> SI</option>
+                    <option disabled> NO</option>
+
+                </select>
+
+                <span asp-validation-for="tarjeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estado" class="control-label"></label>
+                <select asp-for="estado" class="form-control">
+                    <option selected>--Seleccione estado--</option>
+                    <option>ACTIVO</option>
+                    <option>DESACTIVO</option>
+
+                </select>
+
+                <span asp-validation-for="estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
