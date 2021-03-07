@@ -51,7 +51,7 @@ namespace ROSARIOAPP.Controllers
         // GET: Materias/Create
         public IActionResult Create()
         {
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente");
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres","Apellidos");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace ROSARIOAPP.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", materia.Iddocente);
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres", materia.Iddocente);
             return View(materia);
         }
 
@@ -85,7 +85,7 @@ namespace ROSARIOAPP.Controllers
             {
                 return NotFound();
             }
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", materia.Iddocente);
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres", materia.Iddocente);
             return View(materia);
         }
 
@@ -121,7 +121,7 @@ namespace ROSARIOAPP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", materia.Iddocente);
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres", materia.Iddocente);
             return View(materia);
         }
 

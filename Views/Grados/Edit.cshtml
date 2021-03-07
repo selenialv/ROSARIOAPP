@@ -6,36 +6,38 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Idgrado" />
             <div class="form-group">
                 <label asp-for="Grado1" class="control-label">Grado</label>
                 <select asp-for="Grado1" class="form-control" required="">
-                    <option disabled>--Seleccione el grado--</option>
-                    <option> A</option>
-                    <option> B</option>
-                    <option> C</option>
-                    <option> D</option>
+                    <option> Primero</option>
+                    <option> Segundo</option>
+                    <option> Tercero</option>
+                    <option> Cuarto</option>
+                    <option> Quinto</option>
+                    <option> Sexto</option>
 
                 </select>
                 <span asp-validation-for="Grado1" class="text-danger"></span>
             </div>
+            @*//Botones de guardado y cerrado*@
+            <div class="modal-footer">
+
+                <button type="submit" class="btn-sm btn-primary">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+
+                <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
         </form>
     </div>
 </div>
 
-
-<div class="modal-footer">
-
-    <button type="submit" class="btn btn-primary">
-        <i class="fa fa-save"></i>
-        Guardar
-    </button>
-
-    <button type="button" href="#myModal" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

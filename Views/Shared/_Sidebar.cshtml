@@ -18,7 +18,7 @@
         <hr class="sidebar-divider my-0">
     </li>
 
-
+    @*//Visible al admin junto a user*@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" asp-action="Index" asp-controller="Home">
@@ -50,7 +50,7 @@
 
     <li class="nav-item">
         <a class="nav-link" asp-action="Index" asp-controller="Matriculas">
-            <i class="fas fa-note"></i>
+            <i class="fas fa-book"></i>
             <span>Matriculas</span>
         </a>
     </li>
@@ -68,7 +68,7 @@
         <hr class="sidebar-divider my-0">
     </li>
 
-    @*Permisos para las vistas*@
+    @*Permisos para las vistas en base al rol asignado*@
 
     @if (User.IsInRole("admin"))
     {
@@ -88,17 +88,18 @@
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
                  data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
+                <div class="bg-white py-2 collapse-inner rounded"> @*//Menú visible al admin*@
                     <h6 class="collapse-header">Registrar:</h6>
+                    <a class="collapse-item" asp-action="Index" asp-controller="Grados">Grados</a>
                     <a class="collapse-item" asp-action="Index" asp-controller="Grupos">Grupos</a>
-                    <a class="collapse-item" asp-action="Index" asp-controller="Materias">Materias</a>
                     <a class="collapse-item" asp-action="Index" asp-controller="Modalidads">Modalidades</a>
+                    <a class="collapse-item" asp-action="Index" asp-controller="Materias">Materias</a>
                     <a class="collapse-item" asp-action="Index" asp-controller="Docentes">Docentes</a>
                     <a class="collapse-item" asp-action="Index" asp-controller="Asignar">Asignar grupo a docente</a>
 
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Otras páginas</h6>
-                    <a class="collapse-item" asp-action="Index" asp-controller="Asignars">Asignar grupo a docente</a>
+                    
 
                 </div>
             </div>
@@ -129,12 +130,6 @@
   
     <!-- Nav Item - Tables -->
 
-    <li class="nav-item">
-        <a class="nav-link" asp-action="Index" asp-controller="Role">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Roles</span>
-        </a>
-    </li>
 
     }
 

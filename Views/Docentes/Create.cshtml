@@ -4,79 +4,173 @@
     ViewData["Title"] = "Create";
     Layout = null;
 }
-
-<link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet">
-
-<h1>Create</h1>
-
-<h4>Docente</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
+    <div class="container">
+        <div class="col-10 mx-auto">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-10 mx-auto"></div>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="Nombres" class="control-label"></label>
+                        <input asp-for="Nombres" class="form-control" required="" />
+                        <span asp-validation-for="Nombres" class="text-danger"></span>
+                    </div>
 
-                <div class="col">
-                    <label asp-for="Apellidos" class="control-label"></label>
-                    <input asp-for="Apellidos" class="form-control" />
-                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    <div class="col">
+                        <label asp-for="Apellidos" class="control-label"></label>
+                        <input asp-for="Apellidos" class="form-control" required="" />
+                        <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sexo" class="control-label"></label>
-                <select asp-for="Sexo" class="form-control">
 
-                    <option selected disabled>Seleccionar</option>
-                    <option>M</option>
-                    <option>F</option>
-                </select>
+                <div class="form-row">
+                    <div class="col-sm-4">
+                        <label asp-for="Cedula" class="control-label">Cédula</label>
+                        <input asp-for="Cedula" class="form-control" required="" />
+                        <span asp-validation-for="Cedula" class="text-danger"></span>
+                    </div>
 
-                <span asp-validation-for="Sexo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cedula" class="control-label"></label>
-                <input asp-for="Cedula" class="form-control" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Departamento" class="control-label"></label>
-                <input asp-for="Departamento" class="form-control" />
-                <span asp-validation-for="Departamento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ciudad" class="control-label"></label>
-                <input asp-for="Ciudad" class="form-control" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Profesion" class="control-label"></label>
-                <input asp-for="Profesion" class="form-control" />
-                <span asp-validation-for="Profesion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+                    <div class="col-sm-4">
+
+                        <label asp-for="Sexo" class="control-label"></label>
+                        <select asp-for="Sexo" class="form-control" required="">
+                            <option selected>Seleccionar</option>
+                            <option>Masculino</option>
+                            <option>Femenino</option>
+
+                        </select>
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label asp-for="Telefono" class="control-label">Teléfono</label>
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <label asp-for="Profesion" class="control-label">Profesión</label>
+                        <input asp-for="Profesion" class="form-control" />
+                        <span asp-validation-for="Profesion" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col-sm-3">
+                        <label asp-for="Departamento" class="control-label"></label>
+                        <select asp-for="Departamento" class="form-control" required="">
+
+                            <option selected>Seleccionar</option>
+                            <option>Esteli</option>
+                            <option>León</option>
+                            <option>Managua</option>
+                            <option>Rivas</option>
+                            <option>Masaya</option>
+                            <option>Granada</option>
+                            <option>San Juan</option>
+                            <option>Chontales</option>
+                            <option>Chinandega</option>
+                            <option>Masaya</option>
+                            <option>Boaco</option>
+                            <option>RAAN</option>
+                            <option>RAAS</option>
+
+                        </select>
+
+                        <span asp-validation-for="Departamento" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label asp-for="Ciudad" class="control-label"></label>
+                        <select asp-for="Ciudad" class="form-control" required="">
+                            <option selected>Seleccionar</option>
+                            <option>Esteli</option>
+                            <option>León</option>
+                            <option>Managua</option>
+                            <option>Rivas</option>
+                            <option>Masaya</option>
+                            <option>Granada</option>
+                            <option>San Juan</option>
+                            <option>Juigalpa</option>
+                            <option>Chinandega</option>
+                            <option>Masaya</option>
+                            <option>Boaco</option>
+                            <option>RAAN</option>
+                            <option>RAAS</option>
+
+                        </select>
+                        <span asp-validation-for="Ciudad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="Direccion" class="control-label"> Dirección</label>
+                        <input asp-for="Direccion" class="form-control" required="" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                @*//Botones de guardado y cerrado*@
+                <div class="modal-footer">
+                    <button type="submit" class="btn-sm btn-primary">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                    <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+  </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    }
+    <script>
+        var provincias_1 = new Array("-", "Esteli", "San Nicolas", "Baleares", "Canarias", "Castilla y León", "Castilla-La Mancha", "...");
+        var provincias_2 = new Array("-", "Salta", "San Juan", "San Luis", "La Rioja", "La Pampa", "...");
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        var todasProvincias = [
+            [],
+            provincias_1,
+            provincias_2,
+
+        ];
+
+        function cambia_provincia() {
+            //tomo el valor del select del pais elegido
+            var pais
+            pais = document.f1.pais[document.f1.pais.selectedIndex].value
+            //miro a ver si el pais está definido
+            if (pais != 0) {
+                //si estaba definido, entonces coloco las opciones de la provincia correspondiente.
+                //selecciono el array de provincia adecuado
+                mis_provincias = todasProvincias[pais]
+                //calculo el numero de provincias
+                num_provincias = mis_provincias.length
+                //marco el número de provincias en el select
+                document.f1.provincia.length = num_provincias
+                //para cada provincia del array, la introduzco en el select
+                for (i = 0; i < num_provincias; i++) {
+                    document.f1.provincia.options[i].value = mis_provincias[i]
+                    document.f1.provincia.options[i].text = mis_provincias[i]
+                }
+            } else {
+                //si no había provincia seleccionada, elimino las provincias del select
+                document.f1.provincia.length = 1
+                //coloco un guión en la única opción que he dejado
+                document.f1.provincia.options[0].value = "-"
+                document.f1.provincia.options[0].text = "-"
+            }
+            //marco como seleccionada la opción primera de provincia
+            document.f1.provincia.options[0].selected = true
+        }
+
+    </script>

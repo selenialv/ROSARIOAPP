@@ -6,16 +6,25 @@
 }
 
 <div class="row">
-    <div class="m-auto">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Modalidad1" class="control-label">Modalidad</label>
-                <input asp-for="Modalidad1" class="form-control"  required=""/>
+                <select asp-for="Modalidad1" class="form-control" required="">
+                    <option disabled>Seleccione una opción</option>
+                    <option>Matutino</option>
+                    <option>Vespertino</option>
+                </select>
                 <span asp-validation-for="Modalidad1" class="text-danger"></span>
             </div>
-            <div class="form-group" align="center">
-                <input type="submit" value="Guardar" class="btn btn-primary"  />
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+                <button type="button" href="#myModal" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
         </form>
     </div>

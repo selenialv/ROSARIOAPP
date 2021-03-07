@@ -5,38 +5,38 @@
     Layout = null;
 }
 
-
-
 <div class="row">
-    <div class="mb-lg-auto">
+    <div class="col-mb-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Iddocente" class="control-label"></label>
-                <select id="docente" asp-for="Iddocente" class="form-control" asp-items="ViewBag.Iddocente">Seleccione</select>
+                <label asp-for="Iddocente" class="control-label">Seleccione docente:</label>
+                <select id="docente" asp-for="Iddocente" class="form-control" asp-items="ViewBag.Iddocente"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Idgrupo" class="control-label"></label>
+                <label asp-for="Idgrupo" class="control-label">Seleccione grupo:</label>
                 <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo"></select>
             </div>
             <div class="form-group">
-                <label asp-for="tutor" class="control-label"></label>
+                <label asp-for="tutor" class="control-label">Tutor:</label>
                 <input asp-for="tutor" class="form-control" />
                 <span asp-validation-for="tutor" class="text-danger"></span>
             </div>
-        </form>
-        <div class="form-group" align="right">
+
+            @*//Botones de guardado y cerrado*@
             <div class="modal-footer">
 
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <button type="submit" class="btn-sm btn-primary">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
 
-
-                <button type="button" href="#myModal" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-
+      
 
 
 
