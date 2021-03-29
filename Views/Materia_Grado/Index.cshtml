@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ROSARIOAPP.Models.Materia_Grado>
+
+@{
+    //ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Grado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.materia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tutor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grado.Idgrado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.materia.Idmateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tutor)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

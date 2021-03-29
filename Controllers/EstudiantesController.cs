@@ -6,15 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ROSARIOAPP.Models;
-using Rotativa.AspNetCore;
-using Microsoft.AspNetCore.Authorization;
-
 
 namespace ROSARIOAPP.Controllers
 {
-     //Autorizaciones, permisos
-    [Authorize]
-    [Authorize(Roles = "admin, user")]
     public class EstudiantesController : Controller
     {
         private readonly RosarioDBContext _context;
@@ -30,18 +24,7 @@ namespace ROSARIOAPP.Controllers
             return View(await _context.Estudiante.ToListAsync());
         }
 
-
-
-
         // GET: Estudiantes/Details/5
-
-        public async Task<IActionResult> estudiantePDF()
-        {
-
-            return new ViewAsPdf(await _context.Estudiante.ToListAsync());
-        }
-        //fin de codigo
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,7 +33,6 @@ namespace ROSARIOAPP.Controllers
             }
 
             var estudiante = await _context.Estudiante
-             
                 .FirstOrDefaultAsync(m => m.Idestudiante == id);
             if (estudiante == null)
             {
@@ -63,7 +45,6 @@ namespace ROSARIOAPP.Controllers
         // GET: Estudiantes/Create
         public IActionResult Create()
         {
-           
             return View();
         }
 
@@ -72,21 +53,14 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idestudiante,Nombres,Apellidos,codigo,fecha_nac,Edad,Sexo,Departamento,Ciudad,Direccion")] Estudiante estudiante)
+        public async Task<IActionResult> Create([Bind("Idestudiante,codigo,Nombres,Apellidos,fecha_nac,Edad,Sexo,Departamento,Ciudad,Direccion")] Estudiante estudiante)
         {
-            if (_context.Estudiante.Any(c => c.codigo == estudiante.codigo))
-            {
-            ModelState.AddModelError("codigo", $"Este código ya esta registrado.");
-         } 
-
-
             if (ModelState.IsValid)
             {
                 _context.Add(estudiante);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
             return View(estudiante);
         }
 
@@ -103,7 +77,6 @@ namespace ROSARIOAPP.Controllers
             {
                 return NotFound();
             }
-           
             return View(estudiante);
         }
 
@@ -112,7 +85,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idestudiante,Idtutor,Nombres,Apellidos,codigo,fecha_nac,Edad,Sexo,Departamento,Ciudad,Direccion")] Estudiante estudiante)
+        public async Task<IActionResult> Edit(int id, [Bind("Idestudiante,codigo,Nombres,Apellidos,fecha_nac,Edad,Sexo,Departamento,Ciudad,Direccion")] Estudiante estudiante)
         {
             if (id != estudiante.Idestudiante)
             {
@@ -139,7 +112,6 @@ namespace ROSARIOAPP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-           
             return View(estudiante);
         }
 
@@ -152,7 +124,6 @@ namespace ROSARIOAPP.Controllers
             }
 
             var estudiante = await _context.Estudiante
-             
                 .FirstOrDefaultAsync(m => m.Idestudiante == id);
             if (estudiante == null)
             {

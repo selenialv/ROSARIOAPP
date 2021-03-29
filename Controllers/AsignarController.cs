@@ -53,8 +53,8 @@ namespace ROSARIOAPP.Controllers
         // GET: Asignar/Create
         public IActionResult Create()
         {
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente");
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo");
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres");
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace ROSARIOAPP.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", asignar.Iddocente);
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo", asignar.Idgrupo);
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo", asignar.Idgrupo);
             return View(asignar);
         }
 

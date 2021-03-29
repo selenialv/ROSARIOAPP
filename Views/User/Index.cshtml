@@ -15,6 +15,7 @@
                     <tr>
                         <td>Id</td>
                         <td>Correo electronico</td>
+                        <td>Role</td>
                         <td>Accion</td>
 
                     </tr>
@@ -22,17 +23,18 @@
                 <tbody>
                     @foreach (var user in Model)
                     {
-                        <tr>
-                            <td>@user.Id</td>
-                            <td>@user.Email</td>
-                            <td><a class="btn-danger btn-sm"
-                               data-id="@user.Id"><i class="fas fa-trash-alt"></i>
-                            </a></td>
-                            
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Email</td>
+                    
+                        <td>
+                            <a class="btn-danger btn-sm"
+                               data-id="@user.Id">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
 
-                        </tr>
-
-
+                    </tr>
                     }
                 </tbody>
             </table>

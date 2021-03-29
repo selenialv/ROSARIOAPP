@@ -25,6 +25,7 @@ namespace ROSARIOAPP.Controllers
         public IActionResult Index()
         {
             var roles = roleManager.Roles.ToList();
+            
             return View(roles); 
         }
 
@@ -41,5 +42,9 @@ namespace ROSARIOAPP.Controllers
             return RedirectToAction("Index");
 
         }
+
+
+
+
     }
 }

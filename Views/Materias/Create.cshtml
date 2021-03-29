@@ -1,23 +1,25 @@
 ﻿@model ROSARIOAPP.Models.Materia
 
 @{
-    ViewData["Title"] = "Materia/Create";
+    //ViewData["Title"] = "Materia/Create";
     Layout = null;
 }
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="Create">
+        <form asp-action="Create"  onsubmit="return validacion()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Iddocente" class="control-label">Seleccione el docente:</label>
-                <select asp-for="Iddocente" class="form-control" asp-items="ViewBag.Iddocente"></select>
+
+                <select id="selector" asp-for="Iddocente" class="form-control select2-container--bootstrap4" asp-items="ViewBag.Iddocente"></select>
 
             </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label">Nombre de Materia:</label>
-                <input asp-for="Nombre" class="form-control" required="" maxlength="10" />
+                <input id="nombre" asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
+                
             </div>
             @*//Botones de guardado y cerrado*@
             <div class="modal-footer">
@@ -33,6 +35,33 @@
         </form>
     </div>
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#selector").select2({
+            dropdownParent: $("#myModal"),
+            placeholder: "Buscar docente",
+            allowClear: false
+        });
+    });
+
+</script>
+<script>
+    function validacion() {
+
+        valor = document.getElementById("Nombre").value;
+        if (valor == null || valor.length == 0 || /^\s+$/.test(valor)) {
+
+            alert('[ERROR] El campo es obligatorio');
+            return false;
+        }
+
+        // Si el script ha llegado a este punto, todas las condiciones
+        // se han cumplido, por lo que se devuelve el valor true
+        return true;
+    }
+</script>
 
 
 

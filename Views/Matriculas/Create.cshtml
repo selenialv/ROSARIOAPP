@@ -5,69 +5,143 @@
     Layout = null;
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" /> 
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-12">
+        <form class="form-horizontal" style="margin:0 auto" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Idestudiante" class="control-label">Estudiante:</label>
-                <select asp-for="Idestudiante" class ="form-control" asp-items="ViewBag.Idestudiante"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Idmodalidad" class="control-label"></label>
-                <select asp-for="Idmodalidad" class ="form-control" asp-items="ViewBag.Idmodalidad">Modalidad</select>
-            </div>
-            <div class="col">
-                <label asp-for="Idgrupo" class="control-label">Grupo</label>
-                <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="año_lectivo" class="control-label">Año lectivo</label>
-                <input asp-for="año_lectivo" class="form-control" />
-                <span asp-validation-for="año_lectivo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fecha_matricula" class="control-label">Fecha de matricula</label>
-                <input asp-for="fecha_matricula" class="form-control" />
-                <span asp-validation-for="fecha_matricula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="repitente" class="control-label">Repitente</label>
-                <select asp-for="repitente" class="form-control" required="">
-                    <option selected>Seleccionar</option>
-                    <option>SI</option>
-                    <option> NO</option>
+            <div class="form-row">
 
-                </select>
-                <span asp-validation-for="repitente" class="text-danger"></span>
+                <div class="form-group col-md-4">
+                    <label asp-for="fecha_matricula" class="control-label">Fecha</label>
+                    <input type="date" asp-for="fecha_matricula" class="form-control" />
+                    <span asp-validation-for="fecha_matricula" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Idestudiante" class="control-label">Estudiante(*)</label>
+                <select id="selector" asp-for="Idestudiante" class="form-control select2-container--bootstrap4" asp-items="ViewBag.Idestudiante"></select>
+
+            </div>
+            <br />
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="Idmodalidad" class="control-label">Modalidad:</label>
+                    <select asp-for="Idmodalidad" class="form-control" asp-items="ViewBag.Idmodalidad">
+                        <option hidden selected>Seleccione</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="Idgrupo" class="control-label">Grupo(*):</label>
+                    <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo">
+                        <option hidden selected>Seleccione</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="año_lectivo" class="control-label">Año lectivo</label>
+                    <input asp-for="año_lectivo" class="form-control" maxlength="4" required="" />
+                    <span asp-validation-for="año_lectivo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="repitente" class="control-label">Repitente</label>
+                    <select asp-for="repitente" class="form-control" required="">
+                        <option hidden selected>Seleccione</option>
+                        <option>SI</option>
+                        <option> NO</option>
+
+                    </select>
+                    <span asp-validation-for="repitente" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="tarjeta" class="control-label">Tarjeta</label>
+                    <select asp-for="tarjeta" class="form-control" required="">
+                        <option hidden selected>Seleccione</option>
+                        <option> SI</option>
+                        <option> NO</option>
+
+                    </select>
+
+                    <span asp-validation-for="tarjeta" class="text-danger"></span>
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <div class="mb-3">
+                    <label asp-for="observacion" class="form-label">Observación</label>
+                    <textarea asp-for="observacion" class="form-control" rows="3"> </textarea>
+                    <span asp-validation-for="observacion" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="tarjeta" class="control-label">Tarjeta de vacuna</label>
-                <select asp-for="tarjeta" class="form-control" required="">
-                    <option disabled> SI</option>
-                    <option disabled> NO</option>
-
-                </select>
-
-                <span asp-validation-for="tarjeta" class="text-danger"></span>
+                <div class="form-check-inline ">
+                    <label asp-for="estado" class="form-check-label">
+                        <input asp-for="estado" type="checkbox" class="form-check-input" value="">Activo
+                    </label>
+                    
+                </div>
+                <div class="form-check-inline">
+                    <label asp-for="estado" class="form-check-label">
+                        <input asp-for="estado" type="checkbox" class="form-check-input" value="">Inactivo
+                    </label>
+                    <span asp-validation-for="estado" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="estado" class="control-label"></label>
-                <select asp-for="estado" class="form-control">
-                    <option selected>--Seleccione estado--</option>
-                    <option>ACTIVO</option>
-                    <option>DESACTIVO</option>
 
-                </select>
+         
+            <div class="modal-footer">
 
-                <span asp-validation-for="estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <button type="submit" class="btn-sm btn-primary" onclick="pregunta()" value="Enviar">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+
+                <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
         </form>
+       
     </div>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js">//Link para alert(mensaje de exito) Ajax</script> 
+<script> //scrip para el campo seleccion(estudiante), entrada buscador.
+
+    $(document).ready(function () {
+        $("#selector").select2({
+            dropdownParent: $("#myModal"),
+            placeholder: "Buscar por código",
+          
+            allowClear: true
+        });
+    });
+
+</script> 
+
+@*<script>// Funcion js para el mensaje de éxito.
+    function pregunta() {
+
+        swal({
+            title: "Guardado con éxito!",
+            text: "Redireccionando en 2 seg.",
+            type: "success",
+            timer: 2000,
+            showConfirmButton: false
+        }, function () {
+            window.location.href = "tupaginaweb.com";
+        });
+    } 
+    //fin
+</script>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

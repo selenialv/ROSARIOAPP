@@ -49,9 +49,11 @@ namespace ROSARIOAPP.Controllers
         }
 
         // GET: Materias/Create
-        public IActionResult Create()
+        public IActionResult Create( )
         {
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres","Apellidos");
+            
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Fulldocente");
+         
             return View();
         }
 
@@ -60,17 +62,26 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idmateria,Iddocente,Nombre")] Materia materia)
+        public async Task<IActionResult> Create([Bind("Idmateria,Iddocente, Nombre")] Materia materia)
         {
+            if (_context.Materia.Any(c => c.Nombre == materia.Nombre))
+            {
+                ModelState.AddModelError("Nombre", $"Esta materia ya esta registrado.");
+            }
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(materia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres", materia.Iddocente);
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Fulldocente", materia.Iddocente);
             return View(materia);
+
+
         }
+
 
         // GET: Materias/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -85,7 +96,7 @@ namespace ROSARIOAPP.Controllers
             {
                 return NotFound();
             }
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres", materia.Iddocente);
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Fulldocente", materia.Iddocente);
             return View(materia);
         }
 
@@ -94,7 +105,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idmateria,Iddocente,Nombre")] Materia materia)
+        public async Task<IActionResult> Edit(int id, [Bind("Idmateria,Iddocente")] Materia materia)
         {
             if (id != materia.Idmateria)
             {

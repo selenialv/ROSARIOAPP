@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ROSARIOAPP.Models.Nota>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.parcial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.corte_evaluativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nota_final)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdmateriaNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.parcial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.corte_evaluativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nota_final)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdmateriaNavigation.Idmateria)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Idnota">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Idnota">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Idnota">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

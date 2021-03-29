@@ -11,14 +11,14 @@ namespace ROSARIOAPP.Models
         public int Idgrupo { get; set; }
 
         public int año_lectivo { get; set; }
-        public DateTime fecha_matricula { get; set; }
+        public string fecha_matricula { get; set; } 
         public string repitente { get; set; }
         public string tarjeta { get; set; }
 
         public string estado { get; set; }
+        public string observacion { get; set; }
 
 
-    
         public virtual Estudiante IdestudianteNavigation { get; set; }
  
         public virtual Modalidad IdmodalidadNavigation { get; set; }

@@ -1,0 +1,54 @@
+﻿@*//Vista de manual usuarios*@
+
+<div class="row" align="center">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title text-blue" align="center">Manual de usuario</h2>
+
+                @if (User.IsInRole("admin"))
+                {
+
+            <div class="content">
+                <h3>Manual Administrador</h3>
+                <br />
+                <h7>
+                    1. Como primer paso el admininistrador cuenta con toda la disposición de la aplicaión web.
+                    El administrador puede crear nuevos usuarios y asignarles roles.
+                </h7>
+                <br />
+
+                <h7>
+                    2. La aplicación cuenta con un modulo de administrador.
+
+                </h7>
+
+                <h7> 3. El administrador debera crear nuevos grados</h7>   <br />
+                <h2>   4. El administador debera crear grupos de clases</h2>   <br />
+                <h2> 5. El administador debera crear modalidades/turnos.</h2>   <br />
+                <h2>6. El aministrador deberá crear nuevas asignaturas.</h2>   <br />
+                <h2>  9. Finalmente el administrador deberá asignar un grupo a los docentes. </h2>
+            </div>
+
+                }
+
+            <div class="content">
+                <br />
+                <h7>
+                    1.Primer paso: Los docentes deberán agregar nuevos estudiantes.
+                </h7>    <br />
+                <h7>
+                    2. Segundo paso: Los docentes deberán matricular estudiantes.
+
+
+                </h7> <br />
+                <h7> 3.Tercer paso: Los docentes deberan asignar calificacion a estudiantes.</h7>
+
+            </div>
+
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+</div>

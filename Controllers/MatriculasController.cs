@@ -49,9 +49,11 @@ namespace ROSARIOAPP.Controllers
         // GET: Matriculas/Create
         public IActionResult Create()
         {
-            ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "Idestudiante");
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo");
-            ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Idmodalidad");
+            ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "codigo");
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo");
+            ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Modalidad1");
+
+         
             return View();
         }
 
@@ -60,18 +62,23 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado")] Matricula matricula)
+        public async Task<IActionResult> Create([Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado, observacion")] Matricula matricula)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(matricula);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "Idestudiante", matricula.Idestudiante);
             ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo", matricula.Idgrupo);
             ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Idmodalidad", matricula.Idmodalidad);
+
+          
             return View(matricula);
+
+
         }
 
         // GET: Matriculas/Edit/5
@@ -98,7 +105,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado")] Matricula matricula)
+        public async Task<IActionResult> Edit(int id, [Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado, observacion")] Matricula matricula)
         {
             if (id != matricula.Idmatricula)
             {

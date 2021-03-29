@@ -7,11 +7,11 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="Create">
+        <form asp-action="Create" onsubmit="return validacion()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Modalidad1" class="control-label">Modalidad</label>
-                <select asp-for="Modalidad1" class="form-control" required="">
+                <select asp-for="Modalidad1" class="form-control">
                     <option disabled>Seleccione una opción</option>
                     <option>Matutino</option>
                     <option>Vespertino</option>
@@ -34,3 +34,19 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    function validacion() {
+      
+            valor = document.getElementById("campo").value;
+            if (valor == null || valor.length == 0 || /^\s+$/.test(valor)) {
+          
+            alert('[ERROR] El campo es obligatorio');
+            return false;
+        }
+ 
+        // Si el script ha llegado a este punto, todas las condiciones
+        // se han cumplido, por lo que se devuelve el valor true
+        return true;
+    }
+</script>

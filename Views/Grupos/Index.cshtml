@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col text-right">
                                 @*<a class="btn btn-danger btn-sm" asp-action="estudiant" align="right">Generar reporte</a>*@
-                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus">Agregar grupo</i></a>
+                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Agregar grupo</a>
                             </div>
                         </div>
                     </div>
@@ -68,22 +68,22 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.seccion)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdgradoNavigation.Idgrado)
-                                    </td>
-                                    <td> 
-                                        <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
-                                           data-id="@item.Idgrupo"><i class="fas fa-edit"></i></a>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.seccion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdgradoNavigation.Grado1)
+                                </td>
+                                <td>
+                                    <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                       data-id="@item.Idgrupo"><i class="fas fa-edit"></i></a>
 
 
-                                        <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
-                                           data-id="@item.Idgrupo"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
+                                    <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                       data-id="@item.Idgrupo"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

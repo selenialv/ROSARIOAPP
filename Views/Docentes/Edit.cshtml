@@ -6,57 +6,100 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-10">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Iddocente" />
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="Nombres" class="control-label"></label>
+                    <input asp-for="Nombres" class="form-control" required="" />
+                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                </div>
+
+                <div class="col">
+                    <label asp-for="Apellidos" class="control-label"></label>
+                    <input asp-for="Apellidos" class="form-control" required="" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Apellidos" class="control-label"></label>
-                <input asp-for="Apellidos" class="form-control" />
-                <span asp-validation-for="Apellidos" class="text-danger"></span>
+
+            <div class="form-row">
+                <div class="col-sm-4">
+                    <label asp-for="Cedula" class="control-label" p>Cédula</label>
+                    <input asp-for="Cedula" class="form-control" required="" maxlength="15" />
+                    <span asp-validation-for="Cedula" class="text-danger"></span>
+                </div>
+
+
+                <div class="col-sm-4">
+
+                    <label asp-for="Sexo" class="control-label"></label>
+                    <select asp-for="Sexo" class="form-control" required="">
+                        <option selected>Seleccionar</option>
+                        <option>M</option>
+                        <option>F</option>
+
+                    </select>
+                    <span asp-validation-for="Sexo" class="text-danger"></span>
+                </div>
+
+                <div class="col-sm-4">
+                    <label asp-for="Telefono" class="control-label">Teléfono</label>
+                    <input asp-for="Telefono" class="form-control" maxlength="8" type="number" required />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
-                <span asp-validation-for="Sexo" class="text-danger"></span>
+
+
+
+            <div class="form-row">
+                <div class="col-sm-6">
+                    <label asp-for="Profesion" class="control-label">Profesión</label>
+                    <input asp-for="Profesion" class="form-control" />
+                    <span asp-validation-for="Profesion" class="text-danger"></span>
+                </div>
+
+                <div class="col-sm-3">
+                    <label asp-for="Departamento" class="control-label"></label>
+                    <select asp-for="Departamento" class="form-control" required="">
+
+                        <option selected>Seleccionar</option>
+                        <option>Esteli</option>
+                        <option>León</option>
+                        <option>Managua</option>
+                        <option>Rivas</option>
+                        <option>Masaya</option>
+                        <option>Granada</option>
+                        <option>San Juan</option>
+                        <option>Chontales</option>
+                        <option>Chinandega</option>
+                        <option>Masaya</option>
+                        <option>Boaco</option>
+                        <option>RAAN</option>
+                        <option>RAAS</option>
+
+                    </select>
+
+                    <span asp-validation-for="Departamento" class="text-danger"></span>
+                </div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="Cedula" class="control-label"></label>
-                <input asp-for="Cedula" class="form-control" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="Direccion" class="control-label"> Dirección</label>
+                    <input asp-for="Direccion" class="form-control" required="" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Departamento" class="control-label"></label>
-                <input asp-for="Departamento" class="form-control" />
-                <span asp-validation-for="Departamento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ciudad" class="control-label"></label>
-                <input asp-for="Ciudad" class="form-control" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Profesion" class="control-label"></label>
-                <input asp-for="Profesion" class="form-control" />
-                <span asp-validation-for="Profesion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <br />
+            @*//Botones de guardado y cerrado*@
+            <div class="modal-footer">
+                <button type="submit" class="btn-sm btn-primary">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+                <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
         </form>
     </div>

@@ -37,6 +37,7 @@
                                          id="modal-content">
                                         <h4 class="fa-align-center">Cargando..</h4>
                                     </div>
+
                                 </div>
                                
                             </div>
@@ -53,40 +54,43 @@
                         </div>
                     </div>
                     <br />
-              
-
 
                     <table id="mateTable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Nombre)
                                 </th>
                                 <th>
                                     Docente
                                 </th>
-                                <th></th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IddocenteNavigation.Iddocente)
-                                    </td>
-                                    <td>
-                                        <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
-                                           data-id="@item.Idmateria"><i class="fas fa-edit"></i></a>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Idmateria)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IddocenteNavigation.Nombres)
+                                    @Html.DisplayFor(modelItem => item.IddocenteNavigation.Apellidos)
+                                </td>
+                                <td>
+                                    <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                       data-id="@item.Idmateria"><i class="fas fa-edit"></i></a>
 
 
-                                        <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
-                                           data-id="@item.Idmateria"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
+                                    <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                       data-id="@item.Idmateria"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -100,9 +104,7 @@
 
     </div>
 
-
 </div><!-- /.container-fluid -->
-
 
 @section scripts
 {

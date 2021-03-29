@@ -61,6 +61,7 @@ namespace ROSARIOAPP.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Message = "Registro insertado";
             return View(grado);
         }
 

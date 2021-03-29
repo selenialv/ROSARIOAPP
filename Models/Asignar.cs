@@ -20,9 +20,10 @@ namespace ROSARIOAPP.Models
         //sbyte tipo de dato Tinyin en SQL
         public sbyte tutor { get; set; }
 
+   
 
         //Referencia con la tabla docente y de grupo 
-   
+
         public virtual Docente IddocenteNavigation { get; set; }
         public virtual Grupo IdgrupoNavigation { get; set; }
    

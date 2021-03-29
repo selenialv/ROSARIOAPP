@@ -5,14 +5,13 @@
     Layout = null;
 }
 
+<h5 align="center">¿Estás seguro que quieres eliminar esto?</h5>
 
-<h3>¿Estás seguro que quieres eliminar esto?</h3>
-<div>
- 
+<form asp-action="Delete" align="center">
+    <input type="hidden" asp-for="Iddocente " />
+    <button type="submit" value="Eliminar" class="btn btn-danger">
+        <i class="fas fa-trash-alt"></i>
+        Eliminar
+    </button>
+</form>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Iddocente" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-
-    </form>
-</div>

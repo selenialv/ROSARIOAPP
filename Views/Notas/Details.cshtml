@@ -1,0 +1,42 @@
+﻿@model ROSARIOAPP.Models.Nota
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Nota</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.parcial)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.parcial)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.corte_evaluativo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.corte_evaluativo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nota_final)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nota_final)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdmateriaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdmateriaNavigation.Idmateria)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Idnota">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

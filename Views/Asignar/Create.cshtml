@@ -5,21 +5,24 @@
     Layout = null;
 }
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" rel="stylesheet" />
+
+
 <div class="row">
-    <div class="col-mb-12">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Iddocente" class="control-label">Seleccione docente:</label>
-                <select id="docente" asp-for="Iddocente" class="form-control" asp-items="ViewBag.Iddocente"></select>
+                <label asp-for="Iddocente" aria-label="Seleccione docente" class="control-label">Seleccione un docente:</label>
+                <select name="selection" id="selection" asp-for="Iddocente" class="form-control select2-container--bootstrap4" style="width: 100%;" tabindex="-1" aria-hidden="true" asp-items="ViewBag.Iddocente" required></select>
             </div>
             <div class="form-group">
-                <label asp-for="Idgrupo" class="control-label">Seleccione grupo:</label>
-                <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo"></select>
+                <label asp-for="Idgrupo" aria-label="Seleccione grupo" class="control-label">Seleccione un grupo:</label>
+                <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo" ></select>
             </div>
             <div class="form-group">
                 <label asp-for="tutor" class="control-label">Tutor:</label>
-                <input asp-for="tutor" class="form-control" />
+                <input asp-for="tutor" placeholder="Tutor" class="form-control" />
                 <span asp-validation-for="tutor" class="text-danger"></span>
             </div>
 
@@ -36,13 +39,25 @@
         </form>
     </div>
 </div>
-      
+
 
 
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script src="~/js/Index.js"></script>
 
 }
+
+<script>
+
+    $(document).ready(function () {
+        $("#selection").select2({
+            dropdownParent: $("#myModal")
+        });
+    });
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>

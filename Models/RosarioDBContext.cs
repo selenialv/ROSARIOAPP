@@ -91,13 +91,10 @@ namespace ROSARIOAPP.Models
 
                 entity.Property(e => e.Cedula)
                     .HasColumnName("cedula")
-                    .HasMaxLength(15)
+                    .HasMaxLength(14)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ciudad)
-                    .HasColumnName("ciudad")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+               
 
                 entity.Property(e => e.Departamento)
                     .HasColumnName("departamento")
@@ -121,7 +118,7 @@ namespace ROSARIOAPP.Models
 
                 entity.Property(e => e.Sexo)
                     .HasColumnName("sexo")
-                    .HasMaxLength(10)
+                    .HasMaxLength(2)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Telefono)
@@ -255,12 +252,12 @@ namespace ROSARIOAPP.Models
                 entity.ToTable("matricula");
 
 
-                entity.Property(e => e.repitente)
+                entity.Property(e => e.año_lectivo)
                     .HasColumnName("año_lectivo")
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.repitente)
+                entity.Property(e => e.fecha_matricula)
                     .HasColumnName("fecha_matricula")
                     .HasMaxLength(10)
                     .IsUnicode(false);
@@ -275,10 +272,15 @@ namespace ROSARIOAPP.Models
                     .HasMaxLength(2)
                     .IsUnicode(false);
 
-                entity.Property(e => e.repitente)
+                entity.Property(e => e.estado)
                     .HasColumnName("estado")
                     .HasMaxLength(10)
                     .IsUnicode(false);
+
+                entity.Property(e => e.observacion)
+                   .HasColumnName("observacion")
+                   .HasMaxLength(30)
+                   .IsUnicode(false);
 
                 entity.HasOne(d => d.IdestudianteNavigation)
                     .WithMany(p => p.Matricula)

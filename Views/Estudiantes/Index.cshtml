@@ -4,14 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"></script>
-
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -33,6 +25,10 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Estudiante</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
 
                                 </div>
                                 <div class="modal-body">
@@ -48,24 +44,15 @@
                         </div>
                     </div>
 
-
-                    <br />
-
-
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                                <a class="btn btn-danger btn-sm" asp-action="estudiantePDF" align="right">Generar reporte</a>
+                               
                                 <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Agregar estudiante</i></a>
                             </div>
                         </div>
                     </div>
-                    <br />
-                    <br />
-
-
-
-
+                
                     <div class="container">
                         <div class="row">
 
@@ -76,6 +63,11 @@
 
                                     <tr>
 
+
+                                        <th>
+                                           Código
+                                        </th>
+
                                         <th>
                                             Nombres
                                         </th>
@@ -85,7 +77,7 @@
                                         </th>
 
                                         <th>
-                                            Código
+                                            Fecha N
                                         </th>
 
                                         <th>
@@ -117,49 +109,53 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.codigo)
+                                        </td>
+                                        <td>
 
-                                                @Html.DisplayFor(modelItem => item.Nombres)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Apellidos)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.codigo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Edad)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Sexo)
-                                            </td>
+                                            @Html.DisplayFor(modelItem => item.Nombres)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Apellidos)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.fecha_nac)
+                                        </td>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Departamento)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Ciudad)
-                                            </td>
-                                            <td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Edad)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sexo)
+                                        </td>
 
-                                                @Html.DisplayFor(modelItem => item.Direccion)
-                                            </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Departamento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Ciudad)
+                                        </td>
+                                        <td>
 
-                                            <td>
-                                                <a href="#myModal" class="btnDeta btn-light btn-sm" data-toggle="modal"
-                                                   data-id="@item.Idestudiante"><i class="fas fa-eye"></i></a>
+                                            @Html.DisplayFor(modelItem => item.Direccion)
+                                        </td>
 
-                                                <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
-                                                   data-id="@item.Idestudiante"><i class="fas fa-edit"></i></a>
+                                        <td>
+                                            <a href="#myModal" class="btnDeta btn-light btn-sm" data-toggle="modal"
+                                               data-id="@item.Idestudiante"><i class="fas fa-eye"></i></a>
+
+                                            <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                               data-id="@item.Idestudiante"><i class="fas fa-edit"></i></a>
 
 
-                                                <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
-                                                   data-id="@item.Idestudiante"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                               data-id="@item.Idestudiante"><i class="fas fa-trash-alt"></i></a>
 
-                                            </td>
+                                        </td>
 
-                                        </tr>
+                                    </tr>
                                     }
                                 </tbody>
 
@@ -187,30 +183,51 @@
     <script>
         $(document).ready(function () {
             $('#estuTable').DataTable({
-                initComplete: function () {
-                    this.api().columns().every(function () {
-                        var column = this;
-                        var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
 
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
-                            });
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json", //para cambiar idioma a español
+                },
 
-                        column.data().unique().sort().each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
-                        });
-                    });
-                }
+                "scrollX": true,
+                responsive: "true",
+                dom: 'Bfrtilp', //llamado de botones
+                buttons: [
+                    {
+                        extend: 'excelHtml5',//exportar a excell
+                        title: 'Data export',
+                        text: ' <i class="fas fa-file-excel"></i>',
+                        className: 'btn btn-success',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, ] //exportar solo la primera y segunda columna
+                        }
+
+                    },
+                    {
+                        extend: 'pdfHtml5', //exportt
+                        title: 'Reporte de  estudiantes',
+                        messageTop: "Escuela Primaria el Rosario ",//Coloca el título dentro del PDF
+                        text: '<i class="far fa-file-pdf"></i></button>',
+                        className: 'btn btn-danger',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,] //exportar solo la primera y segunda columna
+                        }
+
+                    },
+                    {
+                        extend: 'print',
+                        title: 'Data export',
+                        text: ' <i class="fas fa-print"></i>',
+                        className: 'btn btn-info',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //exportar solo la primera y segunda columna
+                        }
+
+                    },
+
+                ]
             });
         });
     </script>
     <script src="~/js/Estudiante/Estudiante.js"></script>
 
 }
-
