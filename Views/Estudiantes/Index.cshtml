@@ -37,9 +37,7 @@
                                         <h4 class="fa-align-center">Cargando..</h4>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -47,17 +45,17 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                               
+
                                 <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Agregar estudiante</i></a>
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="container">
                         <div class="row">
 
 
-                            <table class="display" id="estuTable" style="width:100%">
+                            <table id="estuTable" style="width:100%">
 
                                 <thead>
 
@@ -65,7 +63,7 @@
 
 
                                         <th>
-                                           Código
+                                            Código
                                         </th>
 
                                         <th>
@@ -77,7 +75,7 @@
                                         </th>
 
                                         <th>
-                                            Fecha N
+                                            Fecha Nacimiento
                                         </th>
 
                                         <th>
@@ -94,10 +92,6 @@
                                         </th>
 
                                         <th>
-                                            Ciudad
-                                        </th>
-
-                                        <th>
                                             Dirección
                                         </th>
 
@@ -109,53 +103,51 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.codigo)
-                                        </td>
-                                        <td>
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.codigo)
+                                            </td>
+                                            <td>
 
-                                            @Html.DisplayFor(modelItem => item.Nombres)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Apellidos)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.fecha_nac)
-                                        </td>
+                                                @Html.DisplayFor(modelItem => item.Nombres)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Apellidos)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.fecha_nac)
+                                            </td>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Edad)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sexo)
-                                        </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Edad)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Sexo)
+                                            </td>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Departamento)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Ciudad)
-                                        </td>
-                                        <td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Departamento)
+                                            </td>
 
-                                            @Html.DisplayFor(modelItem => item.Direccion)
-                                        </td>
+                                            <td>
 
-                                        <td>
-                                            <a href="#myModal" class="btnDeta btn-light btn-sm" data-toggle="modal"
-                                               data-id="@item.Idestudiante"><i class="fas fa-eye"></i></a>
+                                                @Html.DisplayFor(modelItem => item.Direccion)
+                                            </td>
 
-                                            <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
-                                               data-id="@item.Idestudiante"><i class="fas fa-edit"></i></a>
+                                            <td>
+                                                <a href="#myModal" class="btnDeta btn-light btn-sm" data-toggle="modal"
+                                                   data-id="@item.Idestudiante"><i class="fas fa-eye"></i></a>
+
+                                                <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                                   data-id="@item.Idestudiante"><i class="fas fa-edit"></i></a>
 
 
-                                            <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
-                                               data-id="@item.Idestudiante"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                                   data-id="@item.Idestudiante"><i class="fas fa-trash-alt"></i></a>
 
-                                        </td>
+                                            </td>
 
-                                    </tr>
+                                        </tr>
                                     }
                                 </tbody>
 
@@ -163,11 +155,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <br />
-
             </div>
         </div>
     </div>
@@ -183,11 +171,9 @@
     <script>
         $(document).ready(function () {
             $('#estuTable').DataTable({
-
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json", //para cambiar idioma a español
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 },
-
                 "scrollX": true,
                 responsive: "true",
                 dom: 'Bfrtilp', //llamado de botones
@@ -198,7 +184,7 @@
                         text: ' <i class="fas fa-file-excel"></i>',
                         className: 'btn btn-success',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, ] //exportar solo la primera y segunda columna
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //exportar solo la primera y segunda columna
                         }
 
                     },
@@ -209,25 +195,28 @@
                         text: '<i class="far fa-file-pdf"></i></button>',
                         className: 'btn btn-danger',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,] //exportar solo la primera y segunda columna
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //exportar solo la primera y segunda columna
                         }
 
                     },
                     {
                         extend: 'print',
-                        title: 'Data export',
+                        title: 'Reporte de estudiantes',
                         text: ' <i class="fas fa-print"></i>',
                         className: 'btn btn-info',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //exportar solo la primera y segunda columna
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //exportar solo la primera y segunda columna
                         }
 
                     },
 
                 ]
+
+
             });
         });
     </script>
+
     <script src="~/js/Estudiante/Estudiante.js"></script>
 
 }

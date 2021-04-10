@@ -9,6 +9,7 @@ using ROSARIOAPP.Models;
 
 namespace ROSARIOAPP.Controllers
 {
+
     public class MatriculasController : Controller
     {
         private readonly RosarioDBContext _context;
@@ -49,7 +50,7 @@ namespace ROSARIOAPP.Controllers
         // GET: Matriculas/Create
         public IActionResult Create()
         {
-            ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "codigo");
+            ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "Fullestudiante");
             ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo");
             ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Modalidad1");
 
@@ -133,8 +134,8 @@ namespace ROSARIOAPP.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "Idestudiante", matricula.Idestudiante);
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo", matricula.Idgrupo);
-            ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Idmodalidad", matricula.Idmodalidad);
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo", matricula.Idgrupo);
+            ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Modalidad1", matricula.Idmodalidad);
             return View(matricula);
         }
 

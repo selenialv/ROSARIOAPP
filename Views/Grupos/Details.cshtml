@@ -2,29 +2,81 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = null;
 }
 
-<h1>Details</h1>
+<h6 align="center">Detalles del grupo</h6>
 
 <div>
-    <h4>Grupo</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.seccion)
+        <dt class="col-sm-2">
+           Sección
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.seccion)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdgradoNavigation)
+        <dt class="col-sm-2">
+           Grado
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdgradoNavigation.Idgrado)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdgradoNavigation.Grado1)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Idgrupo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+   
+    <a align="Right" class="btn-sm btn-success" asp-action="CreateAsignar" asp-route-id="@Model.Idgrupo"><i class="fas fa-plus-square"></i></a> 
+
+    
 </div>
+
+
+<h6 align="center">Asignar docente</h6> 
+
+
+@if (Model.Asignar.Count == 0 ) 
+{
+ <h7> Este grupo no tiene asignación.</h7>
+}
+else
+{
+
+    //Muestra la lista de grupos asignados a docentes de dichos grupos
+   
+<table class="table"> 
+    <thead class="thead-dark">
+        <tr>
+            <th>
+               Docente 
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Asignar.FirstOrDefault().tutor)
+            </th>
+            <th>Accionss</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*//Traido del modelo Asignar M a M*@
+        @foreach (var item in Model.Asignar)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.docente.Fulldocente)
+                </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.tutor)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditAsignar", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "DetailsAsignar", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "DeleteAsignar", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+

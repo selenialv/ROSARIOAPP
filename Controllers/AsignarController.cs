@@ -6,14 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ROSARIOAPP.Models;
-using Microsoft.AspNetCore.Authorization;
-
 
 namespace ROSARIOAPP.Controllers
 {
-
-    [Authorize]
-    [Authorize(Roles = "admin")]
     public class AsignarController : Controller
     {
         private readonly RosarioDBContext _context;
@@ -26,7 +21,7 @@ namespace ROSARIOAPP.Controllers
         // GET: Asignar
         public async Task<IActionResult> Index()
         {
-            var rosarioDBContext = _context.Asignar.Include(a => a.IddocenteNavigation).Include(a => a.IdgrupoNavigation);
+            var rosarioDBContext = _context.Asignar.Include(a => a.docente).Include(a => a.grupo);
             return View(await rosarioDBContext.ToListAsync());
         }
 
@@ -39,9 +34,9 @@ namespace ROSARIOAPP.Controllers
             }
 
             var asignar = await _context.Asignar
-                .Include(a => a.IddocenteNavigation)
-                .Include(a => a.IdgrupoNavigation)
-                .FirstOrDefaultAsync(m => m.Idasignar == id);
+                .Include(a => a.docente)
+                .Include(a => a.grupo)
+                .FirstOrDefaultAsync(m => m.Iddocente == id);
             if (asignar == null)
             {
                 return NotFound();
@@ -53,8 +48,8 @@ namespace ROSARIOAPP.Controllers
         // GET: Asignar/Create
         public IActionResult Create()
         {
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Nombres");
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo");
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente");
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo");
             return View();
         }
 
@@ -63,7 +58,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idasignar,Iddocente,Idgrupo,tutor")] Asignar asignar)
+        public async Task<IActionResult> Create([Bind("Iddocente,Idgrupo,tutor")] Asignar asignar)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +67,7 @@ namespace ROSARIOAPP.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", asignar.Iddocente);
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo", asignar.Idgrupo);
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo", asignar.Idgrupo);
             return View(asignar);
         }
 
@@ -99,9 +94,9 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idasignar,Iddocente,Idgrupo,tutor")] Asignar asignar)
+        public async Task<IActionResult> Edit(int id, [Bind("Iddocente,Idgrupo,tutor")] Asignar asignar)
         {
-            if (id != asignar.Idasignar)
+            if (id != asignar.Iddocente)
             {
                 return NotFound();
             }
@@ -115,7 +110,7 @@ namespace ROSARIOAPP.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AsignarExists(asignar.Idasignar))
+                    if (!AsignarExists(asignar.Iddocente))
                     {
                         return NotFound();
                     }
@@ -140,9 +135,9 @@ namespace ROSARIOAPP.Controllers
             }
 
             var asignar = await _context.Asignar
-                .Include(a => a.IddocenteNavigation)
-                .Include(a => a.IdgrupoNavigation)
-                .FirstOrDefaultAsync(m => m.Idasignar == id);
+                .Include(a => a.docente)
+                .Include(a => a.grupo)
+                .FirstOrDefaultAsync(m => m.Iddocente == id);
             if (asignar == null)
             {
                 return NotFound();
@@ -164,7 +159,7 @@ namespace ROSARIOAPP.Controllers
 
         private bool AsignarExists(int id)
         {
-            return _context.Asignar.Any(e => e.Idasignar == id);
+            return _context.Asignar.Any(e => e.Iddocente == id);
         }
     }
 }

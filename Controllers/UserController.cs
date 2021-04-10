@@ -40,12 +40,22 @@ namespace ROSARIOAPP.Controllers
             return RedirectToAction("Index");
 
         }
-        public async Task<IActionResult> Delete(IdentityUser user)
+           [HttpPost]
+        public async Task<IActionResult> Delete(string id)
         {
-            await userManager.DeleteAsync(user);
-            return RedirectToAction(nameof(Index));
-
+            IdentityUser user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+               
+            }
+            else
+                ModelState.AddModelError("", "User Not Found");
+            return View("Index", userManager.Users);
         }
-       
     }
 }
+       
+

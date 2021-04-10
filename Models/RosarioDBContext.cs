@@ -43,6 +43,19 @@ namespace ROSARIOAPP.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Asignar>()
+                .HasKey(e => new { e.Iddocente, e.Idgrupo });
+
+            modelBuilder.Entity<Asignar>()
+         .HasOne(e => e.docente)
+         .WithMany(n => n.Asignar)
+         .HasForeignKey(e => e.Iddocente);
+
+            modelBuilder.Entity<Asignar>()
+                .HasOne(e => e.grupo)
+                .WithMany(m => m.Asignar)
+                .HasForeignKey(e => e.Idgrupo);
+
 
             modelBuilder.Entity<Nota_Matricula>()
                  .HasKey(e => new { e.Idnota, e.Idmatricula });
@@ -61,8 +74,6 @@ namespace ROSARIOAPP.Models
 
             modelBuilder.Entity<Materia_Grado>()
                  .HasKey(e => new { e.Idmateria, e.Idgrado });
-
- 
 
             modelBuilder.Entity<Materia_Grado>()
          .HasOne(e => e.materia)
@@ -143,16 +154,6 @@ namespace ROSARIOAPP.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ciudad)
-                    .HasColumnName("codigo")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Ciudad)
-                    .HasColumnName("ciudad")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Departamento)
                     .HasColumnName("departamento")
                     .HasMaxLength(20)
@@ -204,6 +205,7 @@ namespace ROSARIOAPP.Models
             {
                 entity.HasKey(e => e.Idgrupo);
                 entity.Property(e => e.Idgrupo)
+
                 .HasColumnName("Idgrupo");
 
                 entity.ToTable("grupo");
@@ -348,32 +350,6 @@ namespace ROSARIOAPP.Models
             });
 
 
-
-            modelBuilder.Entity<Asignar>(entity =>
-            {
-                entity.HasKey(e => e.Idasignar);
-
-                entity.Property(e => e.Idasignar)
-                   .HasColumnName("Idasignar");
-                entity.ToTable("asignar");
-
-                entity.Property(e => e.tutor)
-                  .HasColumnName("tutor")
-                  .HasMaxLength(1)
-                  .IsUnicode(false);
-
-                entity.HasOne(d => d.IddocenteNavigation)
-                     .WithMany(p => p.Asignar)
-                     .HasForeignKey(d => d.Iddocente)
-                     .OnDelete(DeleteBehavior.ClientSetNull)
-                     .HasConstraintName("FK__asignar_Iddocente");
-
-                entity.HasOne(d => d.IdgrupoNavigation)
-                  .WithMany(p => p.Asignar)
-                  .HasForeignKey(d => d.Idgrupo)
-                  .OnDelete(DeleteBehavior.ClientSetNull)
-                  .HasConstraintName("FK__asignar__Idgrupo");
-            });
     
 
             OnModelCreatingPartial(modelBuilder);

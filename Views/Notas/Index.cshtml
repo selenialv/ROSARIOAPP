@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+               Estudiante
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.parcial)
             </th>
             <th>
@@ -30,6 +33,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota_Matricula)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.parcial)
             </td>

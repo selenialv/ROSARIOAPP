@@ -1,4 +1,4 @@
-﻿@model ROSARIOAPP.Models.Asignar
+﻿@model ROSARIOAPP.Models.Nota_Matricula
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,19 +6,14 @@
 
 <h1>Edit</h1>
 
-<h4>Asignar</h4>
+<h4>Nota_Matricula</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Iddocente" />
-            <input type="hidden" asp-for="Idgrupo" />
-            <div class="form-group">
-                <label asp-for="tutor" class="control-label"></label>
-                <input asp-for="tutor" class="form-control" />
-                <span asp-validation-for="tutor" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Idnota" />
+            <input type="hidden" asp-for="Idmatricula" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

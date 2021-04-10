@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = null;
 }
 
 <h1>Details</h1>
@@ -10,15 +11,59 @@
     <h4>Grado</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Grado1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Grado1)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Idgrado">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <a align="Right" class="btn-sm btn-success" asp-action="CreateAsignar" asp-route-id="@Model.Idgrado"><i class="fas fa-plus-square"></i></a>
+
+
 </div>
+
+
+@if (Model.Materia_Grado.Count == 0)
+{
+    <h7> Grado sin materias asignadas</h7>
+}
+else
+{
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Materia_Grado.FirstOrDefault().materia.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Materia_Grado.FirstOrDefault().tutor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Materia_Grado)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.materia.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tutor)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

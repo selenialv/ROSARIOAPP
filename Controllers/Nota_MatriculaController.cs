@@ -9,24 +9,23 @@ using ROSARIOAPP.Models;
 
 namespace ROSARIOAPP.Controllers
 {
-    public class NotasController : Controller
+    public class Nota_MatriculaController : Controller
     {
         private readonly RosarioDBContext _context;
 
-        public NotasController(RosarioDBContext context)
+        public Nota_MatriculaController(RosarioDBContext context)
         {
             _context = context;
         }
 
-        // GET: Notas
+        // GET: Nota_Matricula
         public async Task<IActionResult> Index()
         {
-            var rosarioDBContext = _context.Nota.Include(n => n.IdmateriaNavigation);
-
+            var rosarioDBContext = _context.Nota_Matricula.Include(n => n.Matricula).Include(n => n.Nota);
             return View(await rosarioDBContext.ToListAsync());
         }
 
-        // GET: Notas/Details/5
+        // GET: Nota_Matricula/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,44 +33,45 @@ namespace ROSARIOAPP.Controllers
                 return NotFound();
             }
 
-            var nota = await _context.Nota
-                .Include(n => n.IdmateriaNavigation)
+            var nota_Matricula = await _context.Nota_Matricula
+                .Include(n => n.Matricula)
+                .Include(n => n.Nota)
                 .FirstOrDefaultAsync(m => m.Idnota == id);
-            if (nota == null)
+            if (nota_Matricula == null)
             {
                 return NotFound();
             }
 
-            return View(nota);
+            return View(nota_Matricula);
         }
 
-        // GET: Notas/Create
+        // GET: Nota_Matricula/Create
         public IActionResult Create()
         {
-            ViewData["Idmatricula"] = new SelectList(_context.Matricula, "Idestudiante");
-            ViewData["Idmateria"] = new SelectList(_context.Materia, "Idmateria", "Idmateria");
+            ViewData["Idmatricula"] = new SelectList(_context.Matricula, "Idmatricula", "Idmatricula");
+            ViewData["Idnota"] = new SelectList(_context.Nota, "Idnota", "Idnota");
             return View();
         }
 
-        // POST: Notas/Create
+        // POST: Nota_Matricula/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idnota,Idmateria,parcial,corte_evaluativo,nota_final")] Nota nota)
+        public async Task<IActionResult> Create([Bind("Idnota,Idmatricula")] Nota_Matricula nota_Matricula)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(nota);
+                _context.Add(nota_Matricula);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idmateria"] = new SelectList(_context.Matricula, "Idmatricula", "Idmatricula", nota.Nota_Matricula);
-            ViewData["Idmateria"] = new SelectList(_context.Materia, "Idmateria", "Idmateria", nota.Idmateria);
-            return View(nota);
+            ViewData["Idmatricula"] = new SelectList(_context.Matricula, "Idmatricula", "Idmatricula", nota_Matricula.Idmatricula);
+            ViewData["Idnota"] = new SelectList(_context.Nota, "Idnota", "Idnota", nota_Matricula.Idnota);
+            return View(nota_Matricula);
         }
 
-        // GET: Notas/Edit/5
+        // GET: Nota_Matricula/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,23 +79,24 @@ namespace ROSARIOAPP.Controllers
                 return NotFound();
             }
 
-            var nota = await _context.Nota.FindAsync(id);
-            if (nota == null)
+            var nota_Matricula = await _context.Nota_Matricula.FindAsync(id);
+            if (nota_Matricula == null)
             {
                 return NotFound();
             }
-            ViewData["Idmateria"] = new SelectList(_context.Materia, "Idmateria", "Idmateria", nota.Idmateria);
-            return View(nota);
+            ViewData["Idmatricula"] = new SelectList(_context.Matricula, "Idmatricula", "Idmatricula", nota_Matricula.Idmatricula);
+            ViewData["Idnota"] = new SelectList(_context.Nota, "Idnota", "Idnota", nota_Matricula.Idnota);
+            return View(nota_Matricula);
         }
 
-        // POST: Notas/Edit/5
+        // POST: Nota_Matricula/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idnota,Idmateria,parcial,corte_evaluativo,nota_final")] Nota nota)
+        public async Task<IActionResult> Edit(int id, [Bind("Idnota,Idmatricula")] Nota_Matricula nota_Matricula)
         {
-            if (id != nota.Idnota)
+            if (id != nota_Matricula.Idnota)
             {
                 return NotFound();
             }
@@ -104,12 +105,12 @@ namespace ROSARIOAPP.Controllers
             {
                 try
                 {
-                    _context.Update(nota);
+                    _context.Update(nota_Matricula);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NotaExists(nota.Idnota))
+                    if (!Nota_MatriculaExists(nota_Matricula.Idnota))
                     {
                         return NotFound();
                     }
@@ -120,11 +121,12 @@ namespace ROSARIOAPP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idmateria"] = new SelectList(_context.Materia, "Idmateria", "Idmateria", nota.Idmateria);
-            return View(nota);
+            ViewData["Idmatricula"] = new SelectList(_context.Matricula, "Idmatricula", "Idmatricula", nota_Matricula.Idmatricula);
+            ViewData["Idnota"] = new SelectList(_context.Nota, "Idnota", "Idnota", nota_Matricula.Idnota);
+            return View(nota_Matricula);
         }
 
-        // GET: Notas/Delete/5
+        // GET: Nota_Matricula/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,31 +134,32 @@ namespace ROSARIOAPP.Controllers
                 return NotFound();
             }
 
-            var nota = await _context.Nota
-                .Include(n => n.IdmateriaNavigation)
+            var nota_Matricula = await _context.Nota_Matricula
+                .Include(n => n.Matricula)
+                .Include(n => n.Nota)
                 .FirstOrDefaultAsync(m => m.Idnota == id);
-            if (nota == null)
+            if (nota_Matricula == null)
             {
                 return NotFound();
             }
 
-            return View(nota);
+            return View(nota_Matricula);
         }
 
-        // POST: Notas/Delete/5
+        // POST: Nota_Matricula/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var nota = await _context.Nota.FindAsync(id);
-            _context.Nota.Remove(nota);
+            var nota_Matricula = await _context.Nota_Matricula.FindAsync(id);
+            _context.Nota_Matricula.Remove(nota_Matricula);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool NotaExists(int id)
+        private bool Nota_MatriculaExists(int id)
         {
-            return _context.Nota.Any(e => e.Idnota == id);
+            return _context.Nota_Matricula.Any(e => e.Idnota == id);
         }
     }
 }

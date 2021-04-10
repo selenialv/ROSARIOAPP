@@ -23,7 +23,7 @@
                     <!-- Modal inicio -->
                     <div id="myModal" data-refresh="true" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" aria-hidden="true"
                          style="display: none;">
-                        <div class="modal-dialog modal-sm">
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="staticBackdropLabel">Grados</h5>
@@ -48,13 +48,15 @@
                         <div class="row">
                             <div class="col text-right">
                                 @*<a class="btn btn-danger btn-sm" asp-action="estudiant" align="right">Generar reporte</a>*@
-                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Agregar grado</a>
+                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn- success btn-sm"><i class="fas fa-plus"></i>Agregar grado</a>
                             </div>
                         </div>
                     </div>
                     <br />
+                    <br />
 
-                    <table class="table table-bordered">
+
+                    <table id="myTable" class="table">
                         <thead>
                             <tr>
                                 <th>
@@ -69,22 +71,25 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Idgrado)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Grado1)
-                                </td>
-                                <td>
-                                    <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
-                                       data-id="@item.Idgrado"><i class="fas fa-edit"></i></a>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Idgrado)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Grado1)
+                                    </td>
+                                    <td>
+                                        <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                           data-id="@item.Idgrado"><i class="fas fa-edit"></i></a>
 
 
-                                    <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
-                                       data-id="@item.Idgrado"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                                        <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                           data-id="@item.Idgrado"><i class="fas fa-trash-alt"></i></a>
+
+                                        <a href="#myModal" class="btnDetalle btn-success btn-sm" data-toggle="modal"
+                                           data-id="@item.Idgrado"><i class="fas fa-plus-square"></i></a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -100,3 +105,22 @@
     <script src="~/js/Grado/Grado.js"></script>
 
 }
+ <script>
+     $('.btnDetalle').click(function (eve) {
+
+         $('#modal-content').load("/Grados/Details/" + $(this).data("id"));
+
+     });
+ </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                },
+
+
+            });
+        });
+</script>

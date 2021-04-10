@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ROSARIOAPP.Models.Asignar>
+﻿@model IEnumerable<ROSARIOAPP.Models.Nota_Matricula>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.docente)
+                @Html.DisplayNameFor(model => model.Matricula.Idestudiante)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.grupo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tutor)
+                @Html.DisplayNameFor(model => model.Matricula.Idgrupo)
             </th>
             <th></th>
         </tr>
@@ -27,14 +24,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.docente.Iddocente)
+                @Html.DisplayFor(modelItem => item.Matricula.Idestudiante)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.grupo.Idgrupo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tutor)
+                @Html.DisplayFor(modelItem => item.Matricula.Idgrupo)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

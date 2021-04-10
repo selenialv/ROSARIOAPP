@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ROSARIOAPP.Migrations
 {
@@ -15,10 +14,10 @@ namespace ROSARIOAPP.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nombres = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
                     apellidos = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-                    sexo = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
-                    cedula = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
+                    sexo = table.Column<string>(unicode: false, maxLength: 2, nullable: true),
+                    cedula = table.Column<string>(unicode: false, maxLength: 14, nullable: true),
                     departamento = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-                    ciudad = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
+                    Ciudad = table.Column<string>(nullable: true),
                     telefono = table.Column<string>(unicode: false, maxLength: 8, nullable: true),
                     profesion = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
                     direccion = table.Column<string>(unicode: false, maxLength: 45, nullable: true)
@@ -37,11 +36,10 @@ namespace ROSARIOAPP.Migrations
                     codigo = table.Column<string>(nullable: true),
                     nombres = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
                     apellidos = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-                    fecha_nac1 = table.Column<DateTime>(nullable: false),
+                    fecha_nac1 = table.Column<string>(nullable: true),
                     fecha_nac = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
                     sexo = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
                     departamento = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-                    ciudad = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
                     direccion = table.Column<string>(unicode: false, maxLength: 45, nullable: true)
                 },
                 constraints: table =>
@@ -102,7 +100,7 @@ namespace ROSARIOAPP.Migrations
                     Idgrupo = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Idgrado = table.Column<int>(nullable: false),
-                    seccion = table.Column<int>(unicode: false, maxLength: 10, nullable: false)
+                    seccion = table.Column<string>(unicode: false, maxLength: 10, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -163,30 +161,28 @@ namespace ROSARIOAPP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "asignar",
+                name: "Asignar",
                 columns: table => new
                 {
-                    Idasignar = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     Iddocente = table.Column<int>(nullable: false),
                     Idgrupo = table.Column<int>(nullable: false),
-                    tutor = table.Column<short>(unicode: false, maxLength: 1, nullable: false)
+                    tutor = table.Column<short>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_asignar", x => x.Idasignar);
+                    table.PrimaryKey("PK_Asignar", x => new { x.Iddocente, x.Idgrupo });
                     table.ForeignKey(
-                        name: "FK__asignar_Iddocente",
+                        name: "FK_Asignar_docente_Iddocente",
                         column: x => x.Iddocente,
                         principalTable: "docente",
                         principalColumn: "Iddocente",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__asignar__Idgrupo",
+                        name: "FK_Asignar_grupo_Idgrupo",
                         column: x => x.Idgrupo,
                         principalTable: "grupo",
                         principalColumn: "Idgrupo",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,11 +194,12 @@ namespace ROSARIOAPP.Migrations
                     Idestudiante = table.Column<int>(nullable: false),
                     Idmodalidad = table.Column<int>(nullable: false),
                     Idgrupo = table.Column<int>(nullable: false),
-                    año_lectivo = table.Column<int>(nullable: false),
-                    fecha_matricula = table.Column<DateTime>(nullable: false),
-                    estado = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
+                    año_lectivo = table.Column<int>(unicode: false, maxLength: 10, nullable: false),
+                    fecha_matricula = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
+                    repitente = table.Column<string>(unicode: false, maxLength: 2, nullable: true),
                     tarjeta = table.Column<string>(unicode: false, maxLength: 2, nullable: true),
-                    estado1 = table.Column<string>(nullable: true)
+                    estado = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
+                    observacion = table.Column<string>(unicode: false, maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,13 +249,8 @@ namespace ROSARIOAPP.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_asignar_Iddocente",
-                table: "asignar",
-                column: "Iddocente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_asignar_Idgrupo",
-                table: "asignar",
+                name: "IX_Asignar_Idgrupo",
+                table: "Asignar",
                 column: "Idgrupo");
 
             migrationBuilder.CreateIndex(
@@ -305,7 +297,7 @@ namespace ROSARIOAPP.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "asignar");
+                name: "Asignar");
 
             migrationBuilder.DropTable(
                 name: "Materia_Grado");

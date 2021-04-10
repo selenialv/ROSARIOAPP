@@ -1,7 +1,7 @@
 ﻿@model ROSARIOAPP.Models.Estudiante
 
 @{
-    //ViewData["Title"] = "Create";
+    ViewData["Title"] = "Estudiantes/Create";
     Layout = null;
 
 }
@@ -14,19 +14,22 @@
 
             <div class="form-group col-sm-4">
                 <label asp-for="codigo" class="control-label">Código</label>
-                <input asp-for="codigo" class="form-control" required="" />
+                <input asp-for="codigo" class="form-control" maxlength="15"  oninvalid="setCustomValidity('El codigo no debe ser mayor que 15 carácteres')" oninput="setCustomValidity('')" required  />
                 <span asp-validation-for="codigo" class="text-danger"></span>
             </div>
             <div class="form-row">
                 <div class="col">
-                    <label asp-for="Nombres" class="control-labe l"></label>
-                    <input asp-for="Nombres" class="form-control" required="" />
+                    <label asp-for="Nombres" class="control-label"></label>
+                    <input type="text" asp-for="Nombres" class="form-control" maxlength="15" title="El nombre
+                           no debe contener mas de 15 caracteres" required/>
                     <span asp-validation-for="Nombres" class="text-danger"></span>
                 </div>
 
                 <div class="col">
                     <label asp-for="Apellidos" class="control-label"></label>
-                    <input asp-for="Apellidos" class="form-control" required="" />
+                    <input type="text" asp-for="Apellidos" class="form-control" maxlength="15" required
+                           title="El apellido
+                           no debe contener mas de 15 carácteres"/>
                     <span asp-validation-for="Apellidos" class="text-danger"></span>
                 </div>
             </div>
@@ -35,19 +38,26 @@
             <div class="form-row">
                 <div class="col-sm-2">
                     <label asp-for="Edad" class="control-label"></label>
-                    <input asp-for="Edad" class="form-control" required="" />
+                    <input type="number" asp-for="Edad" class="form-control" pattern="[4-16]" required />
                     <span asp-validation-for="Edad" class="text-danger"></span>
                 </div>
+              
+                    <div class="col-sm-4">
+                        <label asp-for="fecha_nac" class="control-label"></label>
+                        <input type="date" asp-for="fecha_nac" class="form-control" required/>
+                        <span asp-validation-for="fecha_nac" class="text-danger"></span>
+                    </div>
+              
 
 
                 <div class="col-sm-2">
 
-                    <label asp-for="Sexo" class="control-label"></label>
+                    <label asp-for="Sexo" class="control-label">Selecciona</label>
                     <select asp-for="Sexo" class="form-control">
 
                         <option selected disabled>Seleccionar</option>
-                        <option>Masculino</option>
-                        <option>Femenino</option>
+                        <option>M</option>
+                        <option>F</option>
                     </select>
 
                     <span asp-validation-for="Sexo" class="text-danger"></span>
@@ -56,80 +66,46 @@
 
                 <div class="col-md-4">
                     <label asp-for="Departamento" class="control-label"></label>
-                    <select asp-for="Departamento" class="form-control">
+                    <select asp-for="Departamento" id="selection" class="form-control select2-container--bootstrap4" style="width: 100%;" tabindex="-1" aria-hidden="true" required="">
 
-                        <option selected disabled>Seleccionar</option>
                         <option>Esteli</option>
                         <option>León</option>
-                        <option>Managua</option>
-                        <option>Rivas</option>
-                        <option>Masaya</option>
-                        <option>Granada</option>
-                        <option>San Juan</option>
+                        <option>Chinandega</option>
+                        <option>Matagalpa</option>
+                        <option>Jinotega</option>
+                        <option>Madriz</option>
+                        <option>Nueva Segovia</option>
+                        <option>Boaco</option>
                         <option>Chontales</option>
-                        <option>Chinandega</option>
-                        <option>Masaya</option>
-                        <option>Boaco</option>
-                        <option>RAAN</option>
-                        <option>RAAS</option>
-
-                    </select>
-
-                    <span asp-validation-for="Departamento" class="text-danger"></span>
-                </div>
-
-
-                <div class="col">
-                    <label asp-for="Ciudad" class="control-label"></label>
-                    <select asp-for="Ciudad" class="form-control" required="">
-                        <option selected disabled>Seleccionar</option>
-                        <option>Esteli</option>
-                        <option>León</option>
-                        <option>Managua</option>
-                        <option>Rivas</option>
-                        <option>Masaya</option>
+                        <option>Rio San Juan</option>
+                        <option>Carazo</option>
                         <option>Granada</option>
-                        <option>San Juan</option>
-                        <option>Juigalpa</option>
-                        <option>Chinandega</option>
                         <option>Masaya</option>
-                        <option>Boaco</option>
-                        <option>RAAN</option>
-                        <option>RAAS</option>
-
+                        <option>Rivas</option>
+                        <option>Costa Caribe Norte (RAAN)</option>
+                        <option>Costa Caribe Sur (RAAS)</option>
                     </select>
-
-                    <span asp-validation-for="Ciudad" class="text-danger"></span>
+                    <span asp-validation-for="Departamento" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <label asp-for="Direccion" class="control-label"></label>
-                    <input asp-for="Direccion" class="form-control" required="" />
+                    <input asp-for="Direccion" class="form-control" required max="20" title="La dirección no debe tener mas de 20
+                           carácteres" />
                     <span asp-validation-for="Direccion" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <label asp-for="fecha_nac" class="control-label"></label>
-                    <input type="date" asp-for="fecha_nac" class="form-control" required="" />
-                    <span asp-validation-for="fecha_nac" class="text-danger"></span>
-                </div>
-            </div>
-
 
             <div class="modal-footer">
-
-                <button type="submit" class="btn-sm btn-primary" onclick="pregunta()" value="Enviar">
+                <button type="submit" class="btn-sm btn-primary">
                     <i class="fa fa-save"></i>
                     Guardar
                 </button>
 
                 <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
-
-
-        </form>
+        </form>@*//cierre del form*@
 
     </div>
 </div>

@@ -10,30 +10,35 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Idmatricula" />
+            <div class="form-group col-md-5">
+                <label asp-for="fecha_matricula" class="control-label">Fecha</label>
+                <input type="date" asp-for="fecha_matricula" class="form-control" required />
+                <span asp-validation-for="fecha_matricula" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Idestudiante" class="control-label">Estudiante:</label>
-                <select id="selector" asp-for="Idestudiante" class="form-control select2-container--bootstrap4" asp-items="ViewBag.Idestudiante"></select>
+                <select disabled id="selector" asp-for="Idestudiante" class="form-control select2-container--bootstrap4" asp-items="ViewBag.Idestudiante"></select>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="Idmodalidad" class="control-label">Modalidad:</label>
                     <select asp-for="Idmodalidad" class="form-control" asp-items="ViewBag.Idmodalidad"></select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="Idgrupo" class="control-label">Grupo</label>
                     <select asp-for="Idgrupo" class="form-control" asp-items="ViewBag.Idgrupo"></select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="año_lectivo" class="control-label">Año lectivo</label>
-                    <input asp-for="año_lectivo" class="form-control" />
+                    <input asp-for="año_lectivo" class="form-control" min="4" max="4" oninvalid="setCustomValidity('El año lectivo debe contener 4 digitos')" oninput="setCustomValidity('')" required />
                     <span asp-validation-for="año_lectivo" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="repitente" class="control-label">Repitente</label>
                     <select asp-for="repitente" class="form-control select2-container--bootstrap4" required="">
                         <option>Seleccionar</option>
@@ -43,7 +48,7 @@
                     </select>
                     <span asp-validation-for="repitente" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="tarjeta" class="control-label">Tarjeta de vacuna</label>
                     <select asp-for="tarjeta" class="form-control" required="">
                         <option> SI</option>
@@ -53,7 +58,7 @@
 
                     <span asp-validation-for="tarjeta" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="estado" class="control-label"></label>
                     <select asp-for="estado" class="form-control">
                         <option selected>--Seleccione estado--</option>
@@ -66,11 +71,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label asp-for="fecha_matricula" class="control-label">Fecha de matricula</label>
-                <input asp-for="fecha_matricula" class="form-control" />
-                <span asp-validation-for="fecha_matricula" class="text-danger"></span>
-            </div>
+
 
             <div class="modal-footer">
 
@@ -90,3 +91,15 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+    //scrip para el campo seleccion(estudiante), entrada buscador.
+
+    $(document).ready(function () {
+        $("#selector").select2({
+            dropdownParent: $("#myModal"),
+            placeholder: "Buscar por código",
+            allowClear: true
+        });
+    });
+
+</script> 

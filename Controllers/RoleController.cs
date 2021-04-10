@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ROSARIOAPP.Controllers
 {
-    //[Authorize]
-    //[Authorize(Roles = "admin")]
+    [Authorize]
+    [Authorize(Roles = "admin")]
     public class RoleController : Controller
     {
         RoleManager<IdentityRole> roleManager;
@@ -39,6 +39,12 @@ namespace ROSARIOAPP.Controllers
         public async Task<IActionResult> Create(IdentityRole role)
         {
             await roleManager.CreateAsync(role);
+            return RedirectToAction("Index");
+
+        }
+        public async Task<IActionResult> Delete(IdentityRole role)
+        {
+            await roleManager.DeleteAsync(role);
             return RedirectToAction("Index");
 
         }

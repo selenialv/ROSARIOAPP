@@ -46,7 +46,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                   
+                                @*<a class="btn btn-danger btn-sm" asp-action="estudiant" align="right">Generar reporte</a>*@
                                 <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Agregar matricula</a>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                     Repitente
                                 </th>
                                 <th>
-                                    Tarjeta
+                                    Tarjeta 
                                 </th>
                                 <th>
                                     Estado
@@ -100,8 +100,8 @@
                                     @Html.DisplayFor(modelItem => item.IdestudianteNavigation.codigo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.IdestudianteNavigation.Nombres)
-                                    @Html.DisplayFor(modelItem => item.IdestudianteNavigation.Apellidos)
+                                    @Html.DisplayFor(modelItem => item.IdestudianteNavigation.Fullestudiante)
+                                   
 
                                 </td>
                                 <td>
@@ -164,7 +164,6 @@
         $(document).ready(function () {
             $('#matriTable').DataTable({
 
-
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json", //para cambiar idioma a español
                 },
@@ -205,28 +204,7 @@
 
                     },
 
-                ],
-
-             initComplete: function () {
-        this.api().columns().every( function () {
-            var column = this;
-            var select = $('<select><option value=""></option></select>')
-                .appendTo( $(column.header()) )
-                .on( 'change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex(
-                        $(this).val()
-                    );
- 
-                    column
-                        .search( val ? '^'+val+'$' : '', true, false )
-                        .draw();
-                } );
- 
-            column.data().unique().sort().each( function ( d, j ) {
-                select.append( '<option value="'+d+'">'+d+'</option>' )
-            } );
-        } );
-    }
+                ]
             });
         });
     </script>

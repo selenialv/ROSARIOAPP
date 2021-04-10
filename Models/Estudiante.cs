@@ -1,5 +1,6 @@
 ﻿    using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ROSARIOAPP.Models
 {
@@ -21,8 +22,17 @@ namespace ROSARIOAPP.Models
         public string Sexo { get; set; }
      
         public string Departamento { get; set; }
-        public string Ciudad { get; set; }
+   
         public string Direccion { get; set; }
+
+        [NotMapped]
+        public string Fullestudiante
+        {
+            get
+            {
+                return codigo+"-" + Nombres + "" + Apellidos;
+            }
+        }
 
         public virtual ICollection<Matricula> Matricula { get; set; }
        

@@ -4,21 +4,16 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
 <h4>Asignar</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="CreateAsignar" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(Model => Model.Idgrupo)
             <div class="form-group">
                 <label asp-for="Iddocente" class="control-label"></label>
-                <select asp-for="Iddocente" class ="form-control" asp-items="ViewBag.Iddocente"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Idgrupo" class="control-label"></label>
-                <select asp-for="Idgrupo" class ="form-control" asp-items="ViewBag.Idgrupo"></select>
+                <select asp-for="Iddocente" class="form-control" asp-items="ViewBag.Iddocente"></select>
             </div>
             <div class="form-group">
                 <label asp-for="tutor" class="control-label"></label>
@@ -33,7 +28,11 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <div>
+        @Html.ActionLink("Regresr", "Details", new { id = Model.Idgrupo })
+        <a asp-action="Index">Back to List</a>
+    </div>
+    
 </div>
 
 @section Scripts {

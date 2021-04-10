@@ -13,13 +13,15 @@
             <div class="form-row">
                 <div class="col">
                     <label asp-for="Nombres" class="control-label"></label>
-                    <input asp-for="Nombres" class="form-control" required="" />
+                    <input asp-for="Nombres" class="form-control" maxlength="20" title="El nombre
+                           debe tener menos de 20 caracteres" required />
                     <span asp-validation-for="Nombres" class="text-danger"></span>
                 </div>
 
                 <div class="col">
                     <label asp-for="Apellidos" class="control-label"></label>
-                    <input asp-for="Apellidos" class="form-control" required="" />
+                    <input asp-for="Apellidos" class="form-control" maxlength="20"
+                       title="Los apellidos deben tener menos de 20 caracteres" required />
                     <span asp-validation-for="Apellidos" class="text-danger"></span>
                 </div>
             </div>
@@ -27,7 +29,7 @@
             <div class="form-row">
                 <div class="col-sm-4">
                     <label asp-for="Cedula" class="control-label" p>Cédula</label>
-                    <input asp-for="Cedula" class="form-control" required="" maxlength="15" />
+                    <input  asp-for="Cedula" class="form-control" pattern="[0-9]{13}[A-Za-z]{1}"title="Debe poner 13 números y una letra (000-000000-000X)"  required  />
                     <span asp-validation-for="Cedula" class="text-danger"></span>
                 </div>
 
@@ -46,7 +48,7 @@
 
                 <div class="col-sm-4">
                     <label asp-for="Telefono" class="control-label">Teléfono</label>
-                    <input asp-for="Telefono" class="form-control" maxlength="8" type="number" required />
+                    <input asp-for="Telefono" class="form-control" max="8" min="8" title="El numero de telefono debe tener 8 numeros" type="number" required />
                     <span asp-validation-for="Telefono" class="text-danger"></span>
                 </div>
             </div>
@@ -56,31 +58,32 @@
             <div class="form-row">
                 <div class="col-sm-6">
                     <label asp-for="Profesion" class="control-label">Profesión</label>
-                    <input asp-for="Profesion" class="form-control" />
+                    <input type="text" asp-for="Profesion" class="form-control" maxlength="20" required />
                     <span asp-validation-for="Profesion" class="text-danger"></span>
                 </div>
 
                 <div class="col-sm-3">
                     <label asp-for="Departamento" class="control-label"></label>
-                    <select asp-for="Departamento" class="form-control" required="">
+                    <select  asp-for="Departamento" id="selection" class="form-control select2-container--bootstrap4" style="width: 100%;" tabindex="-1" aria-hidden="true" required="">
 
-                        <option selected>Seleccionar</option>
                         <option>Esteli</option>
                         <option>León</option>
-                        <option>Managua</option>
-                        <option>Rivas</option>
-                        <option>Masaya</option>
-                        <option>Granada</option>
-                        <option>San Juan</option>
-                        <option>Chontales</option>
                         <option>Chinandega</option>
-                        <option>Masaya</option>
+                        <option>Matagalpa</option>
+                        <option>Jinotega</option>
+                        <option>Madriz</option>
+                        <option>Nueva Segovia</option>
                         <option>Boaco</option>
-                        <option>RAAN</option>
-                        <option>RAAS</option>
-
+                        <option>Chontales</option>
+                        <option>Rio San Juan</option>
+                        <option>Carazo</option>
+                        <option>Granada</option>
+                        <option>Masaya</option>
+                        <option>Rivas</option>
+                        <option>Costa Caribe Norte (RAAN)</option>
+                        <option>Costa Caribe Sur (RAAS)</option>
                     </select>
-
+       
                     <span asp-validation-for="Departamento" class="text-danger"></span>
                 </div>
 
@@ -112,3 +115,14 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+
+    $(document).ready(function () {
+        $("#selection").select2({
+            placeholder: "Selecciona un departamento",
+            allowClear: true,
+            dropdownParent: $("#myModal")
+        });
+    });
+
+</script>

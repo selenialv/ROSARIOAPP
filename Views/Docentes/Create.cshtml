@@ -12,32 +12,32 @@
 
             <div class="form-row">
                 <div class="col">
-                    <label asp-for="Nombres" class="control-label"></label>
-                    <input asp-for="Nombres" class="form-control" title="Debe contener menos de 20 palabras"
-                           maxlength="20" required />
+                    <label asp-for="Nombres" class="control-label">Nombres completos</label>
+                    <input asp-for="Nombres" class="form-control" 
+                         pattern="^[Aa-Zz]*$" oninvalid="setCustomValidity('Los nombres deben contener menos de 20 caracteres')" oninput="setCustomValidity('')"  maxlength="20" required />
                     <span asp-validation-for="Nombres" class="text-danger"></span>
                 </div>
 
                 <div class="col">
-                    <label asp-for="Apellidos" class="control-label"></label>
-                    <input asp-for="Apellidos" class="form-control" required="" />
+                    <label asp-for="Apellidos" class="control-label">Apellidos completos</label>
+                    <input asp-for="Apellidos" class="form-control"required oninvalid="setCustomValidity('Los apellidos deben contener menos de 20 caracteres')"  maxlength="20" oninput="setCustomValidity('')"/>
                     <span asp-validation-for="Apellidos" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-sm-4">
-                    <label asp-for="Cedula" class="control-label" p>Cédula</label>
-                    <input id="cedula" asp-for="Cedula" class="form-control" maxlength="15" />
+                    <label asp-for="Cedula" class="control-label">Cédula de identidad</label>
+                    <input id="cedula" asp-for="Cedula" class="form-control" pattern="[0-9]{13}[A-Za-z]{1}"title="Debe poner 13 números y una letra (000-000000-000X)" />
                     <span asp-validation-for="Cedula" class="text-danger"></span>
                 </div>
 
 
-                <div class="col-sm-4">
+                <div class="col-sm-4">  
 
-                    <label asp-for="Sexo" class="control-label"></label>
-                    <select asp-for="Sexo" class="form-control" required="">
-                        <option selected>Seleccionar</option>
+                    <label asp-for="Sexo" class="control-label">Seleccione</label>
+                    <select  asp-for="Sexo" class="form-control" required>
+             
                         <option>M</option>
                         <option>F</option>
 
@@ -47,7 +47,7 @@
 
                 <div class="col-sm-4">
                     <label asp-for="Telefono" class="control-label">Teléfono</label>
-                    <input asp-for="Telefono" class="form-control" maxlength="8" type="number" required />
+                    <input asp-for="Telefono" class="form-control" type="number"  required />
                     <span asp-validation-for="Telefono" class="text-danger"></span>
                 </div>
             </div>
@@ -57,29 +57,30 @@
             <div class="form-row">
                 <div class="col-sm-6">
                     <label asp-for="Profesion" class="control-label">Profesión</label>
-                    <input asp-for="Profesion" class="form-control" />
+                    <input asp-for="Profesion" class="form-control"  type="text" />
                     <span asp-validation-for="Profesion" class="text-danger"></span>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-5">
                     <label asp-for="Departamento" class="control-label"></label>
-                    <select asp-for="Departamento" class="form-control" required="">
+                    <select asp-for="Departamento" id="selection" class="form-control select2-container--bootstrap4" style="width: 100%;" tabindex="-1" aria-hidden="true" required="">
 
-                        <option selected>Seleccionar</option>
                         <option>Esteli</option>
                         <option>León</option>
-                        <option>Managua</option>
-                        <option>Rivas</option>
-                        <option>Masaya</option>
-                        <option>Granada</option>
-                        <option>San Juan</option>
-                        <option>Chontales</option>
                         <option>Chinandega</option>
-                        <option>Masaya</option>
+                        <option>Matagalpa</option>
+                        <option>Jinotega</option>
+                        <option>Madriz</option>
+                        <option>Nueva Segovia</option>
                         <option>Boaco</option>
-                        <option>RAAN</option>
-                        <option>RAAS</option>
-
+                        <option>Chontales</option>
+                        <option>Rio San Juan</option>
+                        <option>Carazo</option>
+                        <option>Granada</option>
+                        <option>Masaya</option>
+                        <option>Rivas</option>
+                        <option>Costa Caribe Norte (RAAN)</option>
+                        <option>Costa Caribe Sur (RAAS)</option>
                     </select>
 
                     <span asp-validation-for="Departamento" class="text-danger"></span>
@@ -89,7 +90,8 @@
             <div class="form-row">
                 <div class="col">
                     <label asp-for="Direccion" class="control-label"> Dirección</label>
-                    <input asp-for="Direccion" class="form-control" required="" />
+                    <input asp-for="Direccion" class="form-control" maxlength="30" title="La direccion debe tener
+                           menos de 30 caracteres" required />
                     <span asp-validation-for="Direccion" class="text-danger"></span>
                 </div>
             </div>
@@ -106,24 +108,6 @@
     </div>
 </div>
 
-<script> //para validar campo Cedula de identidad
-    function validacion() {
-
-        valor = document.getElementById("cedula").value;
-        var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
-
-        if (!(/^\d{3}-\d{6}-\d{4}[A-Z]{1}$/.test(valor))) {
-            return false;
-        }
-        alert('[ERROR] El campo cédila debe tener un valor de 13 numeros enterios y una letra al final ejm: (000-000000-0000X)');
-        if (valor.charAt(13) != letras[(valor.substring(0, 8)) % 23]) {
-            return false;
-        }
-        // Si el script ha llegado a este punto, todas las condiciones
-        // se han cumplido, por lo que se devuelve el valor true
-        return true;
-    }
-</script>
 
 
 @section Scripts {
@@ -131,3 +115,14 @@
 
 }
 
+<script>
+
+    $(document).ready(function () {
+        $("#selection").select2({
+            placeholder: "Selecciona un departamento",
+            allowClear: true,
+            dropdownParent: $("#myModal")
+        });
+    });
+
+</script>

@@ -36,6 +36,7 @@ namespace ROSARIOAPP.Controllers
             var materia_Grado = await _context.Materia_Grado
                 .Include(m => m.Grado)
                 .Include(m => m.materia)
+
                 .FirstOrDefaultAsync(m => m.Idmateria == id);
             if (materia_Grado == null)
             {

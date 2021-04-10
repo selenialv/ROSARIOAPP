@@ -6,40 +6,36 @@
 
 }
 
-<div class="row" >
+<div class="row">
     <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="seccion" control-label">Sección:</label>
-                <input asp-for="seccion" class="form-control" required="" />
+                <input type="text" asp-for="seccion" class="form-control" pattern="^[A-Z]*$" oninvalid="setCustomValidity('El grado debe ser en mayuscula')" oninput="setCustomValidity('')" maxlength="1" required />
                 <span asp-validation-for="seccion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Idgrado" class="control-label">Grado:</label>
 
-                <select  asp-for="Idgrado" class="form-control" asp-items="ViewBag.Idgrado"> </select>
+                <select asp-for="Idgrado" class="form-control" asp-items="ViewBag.Idgrado"></select>
             </div>
 
             @*//Botones de guardado y cerrado*@
             <div class="modal-footer">
-
                 <button type="submit" class="btn-sm btn-primary">
                     <i class="fa fa-save"></i>
                     Guardar
                 </button>
-
                 <button type="button" href="#myModal" class="btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
-
-
         </form>
-
+       
     </div>
+  
+   
+
 </div>
-
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

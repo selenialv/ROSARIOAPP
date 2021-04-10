@@ -15,24 +15,26 @@
             <div class="card card-primary card-outline">
                 <div class="card-body">
 
-                    <h3 align="left">Lista de Modalidades</h3>
+                    <h6 class="card-title text-blue">Listado de materias</h6>
                     <!-- Modal -->
                     <div id="myModal" data-refresh="true" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" aria-hidden="true"
                          style="display: none;">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Modalidades</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
 
                                 </div>
                                 <div class="modal-body">
                                     <div class="align-content-center"
                                          id="modal-content">
-                                        <h4>Cargando..</h4>
+                                        <h4> Cargando..</h4>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -41,7 +43,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Nueva modalidad</i></a>
+                                <a id="btnNuevo" data-toggle="modal" href="#myModal" class="btn btn-success btn-sm"><i class="fas fa-plus"> Nueva modalidad</i></a>
                             </div>
                         </div>
                     </div>
@@ -50,10 +52,13 @@
                     <div class="container">
                         <div class="row">
 
-
-                            <table class="table">
+                            
+                            <table id="myTable" class="table">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            #
+                                        </th>
                                         <th>
                                             Modalidad
                                         </th>
@@ -63,19 +68,22 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Modalidad1)
-                                            </td>
-                                            <td>
-                                                <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
-                                                   data-id="@item.Idmodalidad"><i class="fas fa-edit"></i></a>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Idmodalidad)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Modalidad1)
+                                        </td>
+                                        <td>
+                                            <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
+                                               data-id="@item.Idmodalidad"><i class="fas fa-edit"></i></a>
 
 
-                                                <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
-                                                   data-id="@item.Idmodalidad"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
+                                            <a href="#myModal" class="btnDelete btn-danger btn-sm" data-toggle="modal"
+                                               data-id="@item.Idmodalidad"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -89,8 +97,16 @@
 
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#mateTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
 
-
+        });
+    });
+</script>
 
 
 

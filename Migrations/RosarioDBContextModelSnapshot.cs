@@ -14,18 +14,12 @@ namespace ROSARIOAPP.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.12")
+                .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ROSARIOAPP.Models.Asignar", b =>
                 {
-                    b.Property<int>("Idasignar")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Idasignar")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("Iddocente")
                         .HasColumnType("int");
 
@@ -33,18 +27,13 @@ namespace ROSARIOAPP.Migrations
                         .HasColumnType("int");
 
                     b.Property<short>("tutor")
-                        .HasColumnName("tutor")
-                        .HasColumnType("smallint")
-                        .HasMaxLength(1)
-                        .IsUnicode(false);
+                        .HasColumnType("smallint");
 
-                    b.HasKey("Idasignar");
-
-                    b.HasIndex("Iddocente");
+                    b.HasKey("Iddocente", "Idgrupo");
 
                     b.HasIndex("Idgrupo");
 
-                    b.ToTable("asignar");
+                    b.ToTable("Asignar");
                 });
 
             modelBuilder.Entity("ROSARIOAPP.Models.Docente", b =>
@@ -121,12 +110,6 @@ namespace ROSARIOAPP.Migrations
 
                     b.Property<string>("Apellidos")
                         .HasColumnName("apellidos")
-                        .HasColumnType("varchar(20)")
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Ciudad")
-                        .HasColumnName("ciudad")
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
@@ -393,16 +376,16 @@ namespace ROSARIOAPP.Migrations
 
             modelBuilder.Entity("ROSARIOAPP.Models.Asignar", b =>
                 {
-                    b.HasOne("ROSARIOAPP.Models.Docente", "IddocenteNavigation")
+                    b.HasOne("ROSARIOAPP.Models.Docente", "docente")
                         .WithMany("Asignar")
                         .HasForeignKey("Iddocente")
-                        .HasConstraintName("FK__asignar_Iddocente")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ROSARIOAPP.Models.Grupo", "IdgrupoNavigation")
+                    b.HasOne("ROSARIOAPP.Models.Grupo", "grupo")
                         .WithMany("Asignar")
                         .HasForeignKey("Idgrupo")
-                        .HasConstraintName("FK__asignar__Idgrupo")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

@@ -20,25 +20,34 @@ namespace ROSARIOAPP.Controllers
         {
             _context = context;
         }
+        #region
 
         // GET: Grupos
         public async Task<IActionResult> Index()
         {
             var rosarioDBContext = _context.Grupo.Include(g => g.IdgradoNavigation);
+              
             return View(await rosarioDBContext.ToListAsync());
         }
 
         // GET: Grupos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var grupo = await _context.Grupo
+
+            var grupo = await _context.Grupo            
                 .Include(g => g.IdgradoNavigation)
+
+                 .Include(a => a.Asignar)
+                  .ThenInclude(e => e.docente)
+
                 .FirstOrDefaultAsync(m => m.Idgrupo == id);
+
             if (grupo == null)
             {
                 return NotFound();
@@ -50,16 +59,20 @@ namespace ROSARIOAPP.Controllers
         // GET: Grupos/Create
         public IActionResult Create()
         {
-            ViewData["Idgrado"] = new SelectList(_context.Grado, "Idgrado", "Idgrado");
+            ViewData["Idgrado"] = new SelectList(_context.Grado, "Idgrado", "Grado1");
+
             return View();
         }
+
+
+
 
         // POST: Grupos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idgrupo,Idgrado,seccion")] Grupo grupo)
+        public async Task<IActionResult> Create( Grupo grupo)
         {
             if (ModelState.IsValid)
             {
@@ -158,5 +171,55 @@ namespace ROSARIOAPP.Controllers
         {
             return _context.Grupo.Any(e => e.Idgrupo == id);
         }
+        #endregion
+
+        #region
+        // GET: Asignar/Create
+        // GET: Asignar/Create
+        //Metodo para agregar asignacion tipo CREATE
+
+        //MAESTRO DETALLE/ Asignar detalle de los grupos... metodos crear GET Y POST
+        public async Task<IActionResult> CreateAsignar(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var grupo = await _context.Grupo
+
+           .Include(g => g.IdgradoNavigation)
+                 .Include(a => a.Asignar)
+                .FirstOrDefaultAsync(m => m.Idgrupo == id);
+
+            if (grupo == null)
+            {
+                return NotFound();
+            }
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente");
+            var view = new Asignar { Idgrupo = grupo.Idgrupo, };
+            return View(view);
+        }
+
+        // POST: Asignar/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAsignar(Asignar asignar)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(asignar);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", asignar.Idgrupo));
+            }
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", asignar.Iddocente);
+            
+            return View(asignar);
+        }
+        #endregion
     }
 }
+

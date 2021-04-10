@@ -10,24 +10,15 @@ namespace ROSARIOAPP.Models
 {
     public class Asignar
     {
-        //Definir yave primaria
-        [Key]
-        public int Idasignar { get; set; }
         public int Iddocente { get; set; }
+        public Docente docente { get; set; }
+
+        public Grupo grupo { get; set; }
 
         public int Idgrupo { get; set; }
 
         //sbyte tipo de dato Tinyin en SQL
         public sbyte tutor { get; set; }
-
-   
-
-        //Referencia con la tabla docente y de grupo 
-
-        public virtual Docente IddocenteNavigation { get; set; }
-        public virtual Grupo IdgrupoNavigation { get; set; }
-   
-
 
 
     }

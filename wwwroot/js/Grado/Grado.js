@@ -11,6 +11,8 @@ $('.btnEdit').click(function (eve) {
 
 });
 
+
+
 $('.btnDelete').click(function (eve) {
 
     $('#modal-content').load("/Grados/Delete/" + $(this).data("id"));

@@ -17,7 +17,48 @@ namespace ROSARIOAPP.Controllers
         {
             _context = context;
         }
+        // GET: Materia_Grado/Create
+        public async Task<IActionResult> Creategrado(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var grado = await _context.Grado
+                .Include(a => a.Materia_Grado)
+                .FirstOrDefaultAsync(m => m.Idgrado == id);
+            if (grado == null)
+            {
+                return NotFound();
+            }
+
+            var view = new Materia_Grado { Idgrado = grado.Idgrado, };
+            ViewData["Idmateria"] = new SelectList(_context.Materia, "Idmateria", "Idmateria");
+            return View(view);
+
+           
+        }
+        // POST: Materia_Grado/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateGrado(Materia_Grado materia_Grado)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(materia_Grado);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+           
+            ViewData["Idmateria"] = new SelectList(_context.Materia, "Idmateria", "Idmateria", materia_Grado.Idmateria);
+            return View(materia_Grado);
+        }
+
+
+        #region
         // GET: Grados
         public async Task<IActionResult> Index()
         {
@@ -33,6 +74,7 @@ namespace ROSARIOAPP.Controllers
             }
 
             var grado = await _context.Grado
+                .Include(a => a.Materia_Grado)
                 .FirstOrDefaultAsync(m => m.Idgrado == id);
             if (grado == null)
             {
@@ -74,6 +116,8 @@ namespace ROSARIOAPP.Controllers
             }
 
             var grado = await _context.Grado.FindAsync(id);
+
+
             if (grado == null)
             {
                 return NotFound();
@@ -149,5 +193,6 @@ namespace ROSARIOAPP.Controllers
         {
             return _context.Grado.Any(e => e.Idgrado == id);
         }
+        #endregion
     }
 }
