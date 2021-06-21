@@ -63,7 +63,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado, observacion")] Matricula matricula)
+        public async Task<IActionResult> Create([Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado, observacion, turno")] Matricula matricula)
         {
             if (ModelState.IsValid)
             {
@@ -95,9 +95,9 @@ namespace ROSARIOAPP.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "Idestudiante", matricula.Idestudiante);
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo", matricula.Idgrupo);
-            ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Idmodalidad", matricula.Idmodalidad);
+            ViewData["Idestudiante"] = new SelectList(_context.Estudiante, "Idestudiante", "Fullname", matricula.Idestudiante);
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo", matricula.Idgrupo);
+            ViewData["Idmodalidad"] = new SelectList(_context.Modalidad, "Idmodalidad", "Modalidad1", matricula.Idmodalidad);
             return View(matricula);
         }
 
@@ -106,7 +106,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,año_lectivo,fecha_matricula,repitente,tarjeta,estado, observacion")] Matricula matricula)
+        public async Task<IActionResult> Edit(int id, [Bind("Idmatricula,Idestudiante,Idmodalidad,Idgrupo,turno,año_lectivo,fecha_matricula,repitente,tarjeta,estado, observacion")] Matricula matricula)
         {
             if (id != matricula.Idmatricula)
             {

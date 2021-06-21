@@ -53,7 +53,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idestudiante,codigo,Nombres,Apellidos,fecha_nac,Edad,Sexo,Departamento,Direccion")] Estudiante estudiante)
+        public async Task<IActionResult> Create([Bind("Idestudiante,codigo,Nombres,Apellidos,fecha_nac,Edad,Sexo,Departamento,Direccion, tutor, cedula")] Estudiante estudiante)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idestudiante,codigo,Nombres,Apellidos,fecha_nac,Edad,Sexo,Departamento,Direccion")] Estudiante estudiante)
+        public async Task<IActionResult> Edit(int id, [Bind("Idestudiante,codigo,Nombres,Apellidos,fecha_nac,Edad,Sexo,Departamento,Direccion, tutor, cedula")] Estudiante estudiante)
         {
             if (id != estudiante.Idestudiante)
             {

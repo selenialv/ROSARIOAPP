@@ -15,7 +15,7 @@ namespace ROSARIOAPP.Models
         public int Idgrupo { get; set; }
         public int Idgrado  { get; set; }
      
-
+    
         public string seccion { get; set; }
 
 

@@ -144,12 +144,24 @@ namespace ROSARIOAPP.Migrations
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
+                    b.Property<string>("cedula")
+                        .HasColumnName("cedula")
+                        .HasColumnType("varchar(3)")
+                        .HasMaxLength(3)
+                        .IsUnicode(false);
+
                     b.Property<string>("codigo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fecha_nac")
                         .HasColumnName("fecha_nac1")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("tutor")
+                        .HasColumnName("tutor")
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
 
                     b.HasKey("Idestudiante");
 
@@ -291,6 +303,12 @@ namespace ROSARIOAPP.Migrations
                         .HasColumnName("tarjeta")
                         .HasColumnType("varchar(2)")
                         .HasMaxLength(2)
+                        .IsUnicode(false);
+
+                    b.Property<string>("turno")
+                        .HasColumnName("turno")
+                        .HasColumnType("varchar(15)")
+                        .HasMaxLength(15)
                         .IsUnicode(false);
 
                     b.HasKey("Idmatricula");

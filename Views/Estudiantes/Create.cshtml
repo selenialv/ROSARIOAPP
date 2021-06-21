@@ -12,24 +12,24 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group col-sm-4">
-                <label asp-for="codigo" class="control-label">Código</label>
-                <input asp-for="codigo" class="form-control" maxlength="15"  oninvalid="setCustomValidity('El codigo no debe ser mayor que 15 carácteres')" oninput="setCustomValidity('')" required  />
+            <div class="form-row col-sm-4">
+                <label asp-for="codigo" class="control-label">Código:</label>
+                <input asp-for="codigo" class="form-control" maxlength="15" oninvalid="setCustomValidity('El codigo no debe ser mayor que 15 carácteres')" oninput="setCustomValidity('')" required />
                 <span asp-validation-for="codigo" class="text-danger"></span>
             </div>
             <div class="form-row">
                 <div class="col">
-                    <label asp-for="Nombres" class="control-label"></label>
+                    <label asp-for="Nombres" class="control-label">Nombres completos</label>
                     <input type="text" asp-for="Nombres" class="form-control" maxlength="15" title="El nombre
-                           no debe contener mas de 15 caracteres" required/>
+                           no debe contener mas de 15 caracteres" required />
                     <span asp-validation-for="Nombres" class="text-danger"></span>
                 </div>
 
                 <div class="col">
-                    <label asp-for="Apellidos" class="control-label"></label>
+                    <label asp-for="Apellidos" class="control-label">Apellidos completos</label>
                     <input type="text" asp-for="Apellidos" class="form-control" maxlength="15" required
                            title="El apellido
-                           no debe contener mas de 15 carácteres"/>
+                           no debe contener mas de 15 carácteres" />
                     <span asp-validation-for="Apellidos" class="text-danger"></span>
                 </div>
             </div>
@@ -37,22 +37,22 @@
 
             <div class="form-row">
                 <div class="col-sm-2">
-                    <label asp-for="Edad" class="control-label"></label>
+                    <label asp-for="Edad" class="control-label">Edad</label>
                     <input type="number" asp-for="Edad" class="form-control" pattern="[4-16]" required />
                     <span asp-validation-for="Edad" class="text-danger"></span>
                 </div>
-              
-                    <div class="col-sm-4">
-                        <label asp-for="fecha_nac" class="control-label"></label>
-                        <input type="date" asp-for="fecha_nac" class="form-control" required/>
-                        <span asp-validation-for="fecha_nac" class="text-danger"></span>
-                    </div>
-              
+
+                <div class="col-sm-4">
+                    <label asp-for="fecha_nac" class="control-label">Fecha de nacimiento:</label>
+                    <input type="date" asp-for="fecha_nac" class="form-control" required />
+                    <span asp-validation-for="fecha_nac" class="text-danger"></span>
+                </div>
+
 
 
                 <div class="col-sm-2">
 
-                    <label asp-for="Sexo" class="control-label">Selecciona</label>
+                    <label asp-for="Sexo" class="control-label">Sexo</label>
                     <select asp-for="Sexo" class="form-control">
 
                         <option selected disabled>Seleccionar</option>
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label asp-for="Departamento" class="control-label"></label>
+                    <label asp-for="Departamento" class="control-label">Departamento:</label>
                     <select asp-for="Departamento" id="selection" class="form-control select2-container--bootstrap4" style="width: 100%;" tabindex="-1" aria-hidden="true" required="">
 
                         <option>Esteli</option>
@@ -90,7 +90,21 @@
             </div>
             <div class="form-row">
                 <div class="col">
-                    <label asp-for="Direccion" class="control-label"></label>
+                    <label asp-for="tutor" class="control-label">Tutor</label>
+                    <input asp-for="tutor" class="form-control" required max="20" title="El tutor no debe tener mas de 20
+                           carácteres" />
+                    <span asp-validation-for="tutor" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="cedula" class="control-label">Cédula</label>
+                    <input asp-for="cedula" class="form-control" required max="20" title="La cédula de identidad no debe tener mas de 20
+                           carácteres" />
+                    <span asp-validation-for="tutor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="Direccion" class="control-label">Dirección</label>
                     <input asp-for="Direccion" class="form-control" required max="20" title="La dirección no debe tener mas de 20
                            carácteres" />
                     <span asp-validation-for="Direccion" class="text-danger"></span>
@@ -113,3 +127,14 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+
+    $(document).ready(function () {
+        $("#selection").select2({
+            placeholder: "Selecciona un departamento",
+            allowClear: true,
+            dropdownParent: $("#myModal")
+        });
+    });
+
+</script>

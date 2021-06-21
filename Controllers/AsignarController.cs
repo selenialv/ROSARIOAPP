@@ -48,8 +48,8 @@ namespace ROSARIOAPP.Controllers
         // GET: Asignar/Create
         public IActionResult Create()
         {
-            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente");
-            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Idgrupo");
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Fulldocente");
+            ViewData["Idgrupo"] = new SelectList(_context.Grupo, "Idgrupo", "Fullgrupo");
             return View();
         }
 

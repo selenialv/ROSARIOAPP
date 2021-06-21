@@ -44,8 +44,14 @@
 
                 <div class="form-group col-md-4">
                     <label asp-for="año_lectivo" class="control-label">Año lectivo</label>
-                    <input type="number" asp-for="año_lectivo" class="form-control" min="4" max="4"  oninvalid="setCustomValidity('El año lectivo debe contener 4 digitos')" oninput="setCustomValidity('')"  required/>
+                    <input type="number" asp-for="año_lectivo" class="form-control" maxlength="4" oninvalid="setCustomValidity('El año lectivo debe contener 4 digitos')" oninput="setCustomValidity('')" required />
                     <span asp-validation-for="año_lectivo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="turno" class="control-label">Año lectivo</label>
+                    <input type="text" asp-for="turno" class="form-control" maxlength="15" oninvalid="setCustomValidity('El turno debe contener mas de 4 digitos')" oninput="setCustomValidity('')" required />
+                    <span asp-validation-for="turno" class="text-danger"></span>
                 </div>
             </div>
 
@@ -113,7 +119,7 @@
     $(document).ready(function () {
         $("#selector").select2({
             dropdownParent: $("#myModal"),
-            placeholder: "Buscar por código",
+            placeholder: "Buscar el estudiante",
             allowClear: true
         });
     });

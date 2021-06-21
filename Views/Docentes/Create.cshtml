@@ -14,13 +14,13 @@
                 <div class="col">
                     <label asp-for="Nombres" class="control-label">Nombres completos</label>
                     <input asp-for="Nombres" class="form-control" 
-                         pattern="^[Aa-Zz]*$" oninvalid="setCustomValidity('Los nombres deben contener menos de 20 caracteres')" oninput="setCustomValidity('')"  maxlength="20" required />
+                         pattern="^[Aa-Zz]*$" oninvalid="setCustomValidity('Los nombres deben contener menos de 20 carácteres')" oninput="setCustomValidity('')"  maxlength="20" required />
                     <span asp-validation-for="Nombres" class="text-danger"></span>
                 </div>
 
                 <div class="col">
                     <label asp-for="Apellidos" class="control-label">Apellidos completos</label>
-                    <input asp-for="Apellidos" class="form-control"required oninvalid="setCustomValidity('Los apellidos deben contener menos de 20 caracteres')"  maxlength="20" oninput="setCustomValidity('')"/>
+                    <input asp-for="Apellidos" class="form-control"required oninvalid="setCustomValidity('Los apellidos deben contener menos de 20 carácteres')"  maxlength="20" oninput="setCustomValidity('')"/>
                     <span asp-validation-for="Apellidos" class="text-danger"></span>
                 </div>
             </div>
@@ -28,14 +28,14 @@
             <div class="form-row">
                 <div class="col-sm-4">
                     <label asp-for="Cedula" class="control-label">Cédula de identidad</label>
-                    <input id="cedula" asp-for="Cedula" class="form-control" pattern="[0-9]{13}[A-Za-z]{1}"title="Debe poner 13 números y una letra (000-000000-000X)" />
+                    <input id="cedula" asp-for="Cedula" class="form-control" pattern="[0-9]{13}[A-Za-z]{1}"title="Debe poner 13 números y una letra,  ejem: (000-000000-000X)" />
                     <span asp-validation-for="Cedula" class="text-danger"></span>
                 </div>
 
 
                 <div class="col-sm-4">  
 
-                    <label asp-for="Sexo" class="control-label">Seleccione</label>
+                    <label asp-for="Sexo" class="control-label">Sexo</label>
                     <select  asp-for="Sexo" class="form-control" required>
              
                         <option>M</option>
@@ -90,8 +90,8 @@
             <div class="form-row">
                 <div class="col">
                     <label asp-for="Direccion" class="control-label"> Dirección</label>
-                    <input asp-for="Direccion" class="form-control" maxlength="30" title="La direccion debe tener
-                           menos de 30 caracteres" required />
+                    <input asp-for="Direccion" class="form-control" maxlength="45" title="La direccion debe tener
+                           menos de 45 caracteres" required />
                     <span asp-validation-for="Direccion" class="text-danger"></span>
                 </div>
             </div>

@@ -42,9 +42,17 @@ namespace ROSARIOAPP.Controllers
             return RedirectToAction("Index");
 
         }
-        public async Task<IActionResult> Delete(IdentityRole role)
+        public async Task<IActionResult> Delete(string id)
         {
-            await roleManager.DeleteAsync(role);
+            IdentityRole role =
+
+             await roleManager.FindByIdAsync(id);
+
+            if (!(role is null))
+            {
+                var result = await roleManager.DeleteAsync(role);
+                
+            }
             return RedirectToAction("Index");
 
         }

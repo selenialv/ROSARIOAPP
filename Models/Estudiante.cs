@@ -22,7 +22,10 @@ namespace ROSARIOAPP.Models
         public string Sexo { get; set; }
      
         public string Departamento { get; set; }
-   
+        public string tutor { get; set; }
+
+        public string cedula { get; set; }
+
         public string Direccion { get; set; }
 
         [NotMapped]

@@ -9,8 +9,8 @@ using ROSARIOAPP.Models;
 namespace ROSARIOAPP.Migrations
 {
     [DbContext(typeof(RosarioDBContext))]
-    [Migration("20210403040357_primera")]
-    partial class primera
+    [Migration("20210410181441_Primera")]
+    partial class Primera
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

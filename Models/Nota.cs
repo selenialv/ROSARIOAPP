@@ -8,7 +8,7 @@ namespace ROSARIOAPP.Models
         public int Idnota { get; set; }
         public int Idmateria { get; set; }
         public string parcial { get; set; }
-        public string corte_evaluativo { get; set; }
+       
         public string nota_final { get; set; }
 
 

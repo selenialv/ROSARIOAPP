@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Matricula.Idestudiante)
+                @Html.DisplayNameFor(model => model.Nota)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Matricula.Idgrupo)
+                @Html.DisplayNameFor(model => model.Matricula)
             </th>
             <th></th>
         </tr>
@@ -24,17 +24,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-
             <td>
-                @Html.DisplayFor(modelItem => item.Matricula.Idestudiante)
+                @Html.DisplayFor(modelItem => item.Nota.Idnota)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Matricula.Idgrupo)
+                @Html.DisplayFor(modelItem => item.Matricula.Idmatricula)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { Idnota= item.Idnota, Idmatricula=item.Idmatricula}) |
+                @Html.ActionLink("Details", "Details", new { Idnota = item.Idnota, Idmatricula = item.Idmatricula }) |
+                @Html.ActionLink("Delete", "Delete", new { Idnota = item.Idnota, Idmatricula = item.Idmatricula })
             </td>
         </tr>
 }

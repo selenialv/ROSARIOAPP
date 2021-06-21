@@ -169,6 +169,16 @@ namespace ROSARIOAPP.Models
                     .HasMaxLength(3)
                     .IsUnicode(false);
 
+                entity.Property(e => e.tutor)
+                    .HasColumnName("tutor")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.cedula)
+                    .HasColumnName("cedula")
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Edad)
                   .HasColumnName("fecha_nac")
                   .HasMaxLength(10)
@@ -259,6 +269,11 @@ namespace ROSARIOAPP.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
+                entity.Property(e => e.turno)
+                .HasColumnName("turno")
+                .HasMaxLength(15)
+                .IsUnicode(false);
+
                 entity.Property(e => e.fecha_matricula)
                     .HasColumnName("fecha_matricula")
                     .HasMaxLength(10)
@@ -329,11 +344,6 @@ namespace ROSARIOAPP.Models
 
                 entity.Property(e => e.parcial)
                     .HasColumnName("parcial")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.corte_evaluativo)
-                    .HasColumnName("corte_evaluativo")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

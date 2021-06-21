@@ -66,7 +66,6 @@ namespace ROSARIOAPP.Controllers
 
 
 
-
         // POST: Grupos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -219,6 +218,45 @@ namespace ROSARIOAPP.Controllers
             
             return View(asignar);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AsignarEdit(int id, [Bind("Iddocente,Idgrupo,tutor")] Asignar asignar)
+        {
+            if (id != asignar.Iddocente)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(asignar);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AsignarExists(asignar.Iddocente))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["Iddocente"] = new SelectList(_context.Docente, "Iddocente", "Iddocente", asignar.Iddocente);
+           
+            return View(asignar);
+        }
+        private bool AsignarExists(int id)
+        {
+            return _context.Asignar.Any(e => e.Iddocente == id);
+        }
+
         #endregion
     }
 }

@@ -43,7 +43,7 @@ namespace ROSARIOAPP.Areas.Identity.Pages.Account
             var result = await _userManager.ChangeEmailAsync(user, email, code);
             if (!result.Succeeded)
             {
-                StatusMessage = "Error changing email.";
+                StatusMessage = "Error al cambiar correo";
                 return Page();
             }
 
@@ -57,7 +57,7 @@ namespace ROSARIOAPP.Areas.Identity.Pages.Account
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Thank you for confirming your email change.";
+            StatusMessage = "Gracias por confirmar cambio de correo.";
             return Page();
         }
     }

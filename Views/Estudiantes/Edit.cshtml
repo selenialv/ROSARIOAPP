@@ -5,14 +5,13 @@
     Layout = null;
 }
 
-
 <div class="row">
     <div class="col-md-12">      
         <form class="form-horizontal" style="margin:0 auto" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Idestudiante" />
             <div class="form-group col-sm-4">
-                <label asp-for="codigo" class="control-label"></label>
+                <label asp-for="codigo" class="control-label">Código</label>
                 <input asp-for="codigo" class="form-control" />
                 <span asp-validation-for="codigo" class="text-danger"></span>
             </div>
@@ -66,6 +65,20 @@
                 </select>
                 <span asp-validation-for="Departamento" class="text-danger"></span>
             </div>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="tutor" class="control-label">Tutor</label>
+                    <input asp-for="tutor" class="form-control" required max="20" title="El tutor no debe tener mas de 20
+                           carácteres" />
+                    <span asp-validation-for="tutor" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="cedula" class="control-label">Cédula</label>
+                    <input asp-for="cedula" class="form-control" required max="20" title="La cédula de identidad no debe tener mas de 20
+                           carácteres" />
+                    <span asp-validation-for="tutor" class="text-danger"></span>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label asp-for="Direccion" class="control-label"></label>
@@ -85,10 +98,19 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+
+    $(document).ready(function () {
+        $("#selection").select2({
+            placeholder: "Selecciona un departamento",
+            allowClear: true,
+            dropdownParent: $("#myModal")
+        });
+    });
+
+</script>

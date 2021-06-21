@@ -55,13 +55,11 @@
                     <table id="matriTable" class="table table-sm " style="width:100%">
                         <thead>
                             <tr>
+
                                 <th>
-                                    Código
+                                    Estudiante
                                 </th>
-                                <th>
-                                    Estudiantes
-                                </th>
-                               
+
                                 <th>
                                     Grupo
                                 </th>
@@ -73,18 +71,21 @@
                                 <th>
                                     Año lectivo
                                 </th>
+                                <th>
+                                    Turno
+                                </th>
 
                                 <th>
                                     Repitente
                                 </th>
                                 <th>
-                                    Tarjeta 
+                                    Tarjeta de vacuna
                                 </th>
                                 <th>
                                     Estado
                                 </th>
                                 <th>
-                                    Fecha
+                                    Fecha de matricula
                                 </th>
                                 <th>
                                     Observación
@@ -96,12 +97,10 @@
                             @foreach (var item in Model)
                             {
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdestudianteNavigation.codigo)
-                                </td>
+
                                 <td>
                                     @Html.DisplayFor(modelItem => item.IdestudianteNavigation.Fullestudiante)
-                                   
+
 
                                 </td>
                                 <td>
@@ -110,12 +109,15 @@
                                     @Html.DisplayFor(modelItem => item.IdgrupoNavigation.Fullgrupo)
 
                                 </td>
-                                
+
                                 <td>
                                     @Html.DisplayFor(modelItem => item.IdmodalidadNavigation.Modalidad1)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.año_lectivo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.turno)
                                 </td>
 
                                 <td>
@@ -137,11 +139,14 @@
                                 @* Botones redirectorios *@
 
                                 <td>
+                                    <a href="#myModal" class="btnDeta btn-light btn-sm" data-toggle="modal"
+                                       data-id="@item.Idmatricula"><i class="fas fa-eye"></i></a>
                                     <a href="#myModal" class="btnEdit btn-primary btn-sm" data-toggle="modal"
                                        data-id="@item.Idmatricula"><i class="fas fa-edit"></i></a>
 
                                     <a href="#myModal" class="btnDelete btn-danger btn-sm modal-sm" data-toggle="modal"
                                        data-id="@item.Idmatricula"><i class="fas fa-trash-alt"></i></a>
+
 
 
 
@@ -174,22 +179,22 @@
                 buttons: [
                     {
                         extend: 'excelHtml5',//exportar a excell
-                        title: 'Data export',
+                        title: 'Reporte de matriculas',
                         text: ' <i class="fas fa-file-excel"></i>',
                         className: 'btn btn-success',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,9,10,11] //exportar solo la primera y segunda columna
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,9,] //exportar solo la primera y segunda columna
                         }
 
                     },
                     {
                         extend: 'pdfHtml5', //exportt
-                        title: 'Reporte de matriculas',
+                        title: 'Reporte de  matricula',
                         messageTop: "Escuela Primaria el Rosario ",//Coloca el título dentro del PDF
                         text: '<i class="far fa-file-pdf"></i></button>',
                         className: 'btn btn-danger',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] //exportar solo la primera y segunda columna
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,9,] //exportar solo la primera y segunda columna
                         }
 
                     },
@@ -199,7 +204,7 @@
                         text: ' <i class="fas fa-print"></i>',
                         className: 'btn btn-info',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] //exportar solo la primera y segunda columna
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,9,] //exportar solo la primera y segunda columna
                         }
 
                     },

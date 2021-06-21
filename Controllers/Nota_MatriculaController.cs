@@ -26,9 +26,9 @@ namespace ROSARIOAPP.Controllers
         }
 
         // GET: Nota_Matricula/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? Idnota, int? Idmatricula)
         {
-            if (id == null)
+            if (Idnota == null && Idmatricula == null)
             {
                 return NotFound();
             }
@@ -36,7 +36,7 @@ namespace ROSARIOAPP.Controllers
             var nota_Matricula = await _context.Nota_Matricula
                 .Include(n => n.Matricula)
                 .Include(n => n.Nota)
-                .FirstOrDefaultAsync(m => m.Idnota == id);
+                .FirstOrDefaultAsync(m => m.Idnota == Idnota);
             if (nota_Matricula == null)
             {
                 return NotFound();
@@ -72,14 +72,14 @@ namespace ROSARIOAPP.Controllers
         }
 
         // GET: Nota_Matricula/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? Idnota,  int? Idmatricula)
         {
-            if (id == null)
+            if (Idnota == null && Idmatricula == null)
             {
                 return NotFound();
             }
 
-            var nota_Matricula = await _context.Nota_Matricula.FindAsync(id);
+            var nota_Matricula = await _context.Nota_Matricula.FindAsync(Idnota);
             if (nota_Matricula == null)
             {
                 return NotFound();
@@ -94,9 +94,9 @@ namespace ROSARIOAPP.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idnota,Idmatricula")] Nota_Matricula nota_Matricula)
+        public async Task<IActionResult> Edit(int Idnota, int Idmatricula, [Bind("Idnota,Idmatricula")] Nota_Matricula nota_Matricula)
         {
-            if (id != nota_Matricula.Idnota)
+            if (Idnota != nota_Matricula.Idnota)
             {
                 return NotFound();
             }
@@ -127,9 +127,9 @@ namespace ROSARIOAPP.Controllers
         }
 
         // GET: Nota_Matricula/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? Idnota, int? Idmatricula)
         {
-            if (id == null)
+            if (Idnota == null || Idmatricula== null )
             {
                 return NotFound();
             }
@@ -137,7 +137,7 @@ namespace ROSARIOAPP.Controllers
             var nota_Matricula = await _context.Nota_Matricula
                 .Include(n => n.Matricula)
                 .Include(n => n.Nota)
-                .FirstOrDefaultAsync(m => m.Idnota == id);
+                .FirstOrDefaultAsync(m => m.Idnota == Idnota);
             if (nota_Matricula == null)
             {
                 return NotFound();
@@ -146,12 +146,12 @@ namespace ROSARIOAPP.Controllers
             return View(nota_Matricula);
         }
 
-        // POST: Nota_Matricula/Delete/5
+        // POST: Nota_Matricula/Delete/5        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int Idnota, int Idmatricula)
         {
-            var nota_Matricula = await _context.Nota_Matricula.FindAsync(id);
+            var nota_Matricula = await _context.Nota_Matricula.FindAsync(Idnota, Idmatricula);
             _context.Nota_Matricula.Remove(nota_Matricula);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

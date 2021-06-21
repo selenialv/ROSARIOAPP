@@ -11,7 +11,11 @@ $('.btnEdit').click(function (eve) {
 
 });
 
+$('.btnDetalle').click(function (eve) {
 
+    $('#modal-content').load("/Grados/Details/" + $(this).data("id"));
+
+});
 
 $('.btnDelete').click(function (eve) {
 
